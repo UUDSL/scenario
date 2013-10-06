@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
+	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
+	elementFormDefault="qualified"
+	version="1">
+	<element name="script">
+        <complexType>
+			<sequence>
+				<element name="metadata" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Data that describes the script, but is not part of it.</documentation>
+				</annotation>
+					<complexType>
+						<sequence>
+							<element name="name" type="string">
+								<annotation>
+									<documentation>The name of the script.</documentation>
+								</annotation>
+							</element>
+							<element name="date" type="date">
+								<annotation>
+									<documentation>The date the script was published.</documentation>
+								</annotation>
+							</element>
+							<element name="description" type="string">
+								<annotation>
+									<documentation>A free-form description of the script.</documentation>
+								</annotation>
+							</element>
+							<element name="difficulty" type="string">
+								<annotation>
+									<documentation>The difficulty level of the script.</documentation>
+								</annotation>
+							</element>
+							<element name="model">
+								<annotation>
+									<documentation>A specification of the model to be used as
+										the representation of the computer character.</documentation>
+								</annotation>
+								<complexType>
+									<sequence>
+										<element name="premadeModel">
+										<annotation>
+											<documentation>A reference to a premade model.</documentation>
+										</annotation>
+											<complexType>
+												<attribute name="extid" type="ID" use="required" />
+											</complexType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+							<element name="start">
+								<annotation>
+									<documentation>A reference to the first computer sentence of the script.</documentation>
+								</annotation>
+								<complexType>
+									<attribute name="idref" type="IDREF" use="required" />
+								</complexType>
+							</element>
+							<element name="parameters">
+								<annotation>
+									<documentation>A list of all parameters referenced in the script.</documentation>
+								</annotation>
+								<complexType>
+									<sequence>
+										<element name="parameter" maxOccurs="unbounded"
+											minOccurs="0">
+											<annotation>
+												<documentation>A parameter to be referenced in the script.</documentation>
+											</annotation>
+											<complexType>
+												<attribute name="id" type="ID" use="required" />
+												<attribute name="emotionid" type="string" use="optional">
+													<annotation>
+														<documentation>The external ID of the emotion that this parameter represents.</documentation>
+													</annotation>
+												</attribute>
+												<attribute name="name" type="string" use="optional">
+													<annotation>
+														<documentation>A human-readable name for the parameter.</documentation>
+													</annotation>
+												</attribute>
+											</complexType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+    			<choice maxOccurs="unbounded" minOccurs="0">
+    				<element name="computerStatement">
+    					<annotation>
+    						<documentation>A statement of the computer character.</documentation>
+    					</annotation>
+	    				<complexType>
+	    					<complexContent>
+	    						<extension base="tns:statementType">
+	    							<sequence>
+	    								<element minOccurs="0" maxOccurs="1" name="responses">
+	    									<annotation>
+	    										<documentation>
+	    											The possible responses for this statement.
+	    											When this element is missing, all responses are considered possible.
+	    											When this element is empty, it expresses that there are no possible responses.
+	    										</documentation>
+	    									</annotation>
+	    									<complexType>
+	    										<sequence>
+	    											<element minOccurs="0" maxOccurs="unbounded" name="response">
+	    												<annotation>
+	    													<documentation>A reference to a player statement.</documentation>
+	    												</annotation>
+	    												<complexType>
+	    													<attribute name="idref" type="string" use="required" />
+	    												</complexType>
+	    											</element>
+	    										</sequence>
+	    									</complexType>
+	    								</element>
+	    							</sequence>
+	    						</extension>
+	    					</complexContent>
+	    				</complexType>
+	    			</element>
+	    			<element name="playerStatement">
+	    				<annotation>
+	    					<documentation>A statement of the player character.</documentation>
+	    				</annotation>
+	    				<complexType>
+	    					<complexContent>
+	    						<extension base="tns:statementType">
+	    							<sequence>
+	    								<element name="effects">
+											<annotation>
+												<documentation>A list of effects of this statement on the parameters.</documentation>
+											</annotation>
+	    									<complexType>
+	    										<sequence>
+	    											<element name="effect" maxOccurs="unbounded" minOccurs="0">
+	    												<annotation>
+	    													<documentation>An effect of this statement on a parameter.</documentation>
+	    												</annotation>
+	    												<complexType>
+	    													<attribute name="idref" type="IDREF" use="required" />
+	    													<attribute name="changeType" use="required">
+	    														    <simpleType>
+	    														    	<restriction base="string">
+	    														    		<enumeration value="set" />
+	    														    		<enumeration value="delta" />
+	    														    	</restriction>
+	    														    </simpleType>
+	    													</attribute>
+	    													<attribute name="value" type="string" use="required" />
+	    												</complexType>
+	    											</element>
+	    										</sequence>
+	    									</complexType>
+	    								</element>
+	    								<group ref="tns:nextComputerStatementGroup" />
+	    							</sequence>
+	    						</extension>
+	    					</complexContent>
+	    				</complexType>
+	    			</element>
+	    			<element name="conversation">
+	    				<annotation>
+	    					<documentation>A sequence of statements to be displayed in succession.</documentation>
+	    				</annotation>
+	    				<complexType>
+	    					<sequence>
+	    						<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
+	    						<choice maxOccurs="unbounded" minOccurs="1">
+	    							<element name="computerText" type="string" />
+	    							<element name="playerText" type="string" />
+	    						</choice>
+	    						<group ref="tns:nextComputerStatementGroup" />
+	    					</sequence>
+	    					<attribute name="id" type="ID" use="required" />
+	    				</complexType>
+	    			</element>
+	    		</choice>
+    		</sequence>
+    	</complexType>
+
+		<key name="parameterid">
+			<selector xpath="./tns:metadata/tns:parameters/tns:parameter" />
+			<field xpath="@id" />
+		</key>
+		<key name="computerStatementid">
+			<selector xpath="./tns:computerStatement" />
+			<field xpath="@id" />
+		</key>
+		<key name="playerStatementid">
+			<selector xpath="./tns:playerStatement" />
+			<field xpath="@id" />
+		</key>
+		<keyref name="startid" refer="tns:computerStatementid">
+			<selector xpath="./tns:metadata/tns:start" />
+			<field xpath="@idref" />
+		</keyref>
+		<keyref name="preconditionid" refer="tns:parameterid">
+			<selector xpath=".//tns:precondition" />
+			<field xpath="@idref" />
+		</keyref>
+		<keyref name="effectid" refer="tns:parameterid">
+			<selector xpath=".//tns:effect" />
+			<field xpath="@idref" />
+		</keyref>
+		<keyref name="responseid" refer="tns:playerStatementid">
+			<selector xpath=".//tns:response" />
+			<field xpath="@idref" />
+		</keyref>
+		<keyref name="nextcomputerStatementid" refer="tns:computerStatementid">
+			<selector xpath=".//tns:nextcomputerStatement" />
+			<field xpath="@idref" />
+		</keyref>
+    </element>
+
+    <complexType name="preconditionsType">
+    	<choice maxOccurs="unbounded" minOccurs="0">
+    		<element name="and" type="tns:preconditionsType">
+    			<annotation>
+    				<documentation>A set of preconditions, all of which need to be satisfied.</documentation>
+    			</annotation>
+    		</element>
+    		<element name="or" type="tns:preconditionsType">
+    			<annotation>
+    				<documentation>A set of preconditions, one of which needs to be satisfied.</documentation>
+    			</annotation>
+    		</element>
+    		<element name="precondition">
+    			<complexType>
+    				<attribute name="idref" type="string" use="required" />
+    				<attribute name="test" use="required">
+    					<simpleType>
+    						<restriction base="string">
+					    		<enumeration value="equal" />
+					    		<enumeration value="notEqual" />
+					    		<enumeration value="lessThanEqual" />
+					    		<enumeration value="lessThan" />
+					    		<enumeration value="greaterThan" />
+					    		<enumeration value="greaterThanEqual" />
+					    	</restriction>
+				    	</simpleType>
+			    	</attribute>
+    				<attribute name="value" type="string" use="required" />
+    			</complexType>
+    		</element>
+    	</choice>
+    </complexType>
+    <complexType name="statementType" abstract="true">
+    	<sequence>
+    		<element name="text" type="string" />
+    		<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
+            <element minOccurs="0" maxOccurs="1" name="preconditions"
+    			type="tns:preconditionsType" />
+    	</sequence>
+    	<attribute name="id" type="ID" use="required" />
+    </complexType>
+    <complexType name="nextComputerStatementType">
+    	<attribute name="idref" type="string" use="required" />
+    </complexType>
+
+    <group name="mediaGroup">
+		<choice>
+			<element name="video">
+				<complexType>
+					<attribute name="extid" type="string" use="required" />
+				</complexType>
+			</element>
+			<element name="audio">
+				<complexType>
+					<attribute name="extid" type="string" use="required" />
+				</complexType></element>
+		</choice>
+    </group>
+    <group name="nextComputerStatementGroup">
+    <choice>
+		<element name="nextComputerStatement"
+			type="tns:nextComputerStatementType" />
+		<element name="nextComputerStatements">
+	        <complexType>
+	        	<sequence>
+	        		<element
+	        			name="nextComputerStatement"
+	        			type="tns:nextComputerStatementType" maxOccurs="unbounded" minOccurs="0" />
+	        	</sequence>
+	        </complexType>
+		</element>
+	</choice>
+    </group>
+</schema>
