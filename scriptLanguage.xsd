@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="1">
+	version="2">
 	<element name="script">
         <complexType>
 			<sequence>
@@ -13,6 +13,11 @@
 				</annotation>
 					<complexType>
 						<sequence>
+							<element name="id" type="ID">
+								<annotation>
+									<documentation>The Ideas-approved ID of the script.</documentation>
+								</annotation>
+							</element>
 							<element name="name" type="string">
 								<annotation>
 									<documentation>The name of the script.</documentation>
@@ -28,10 +33,19 @@
 									<documentation>A free-form description of the script.</documentation>
 								</annotation>
 							</element>
-							<element name="difficulty" type="string">
+							<element name="difficulty">
 								<annotation>
 									<documentation>The difficulty level of the script.</documentation>
 								</annotation>
+								<simpleType>
+									<restriction base="string">
+										<enumeration value="very_easy" />
+										<enumeration value="easy" />
+										<enumeration value="medium" />
+										<enumeration value="difficult" />
+										<enumeration value="very_difficult" />
+									</restriction>
+								</simpleType>
 							</element>
 							<element name="model">
 								<annotation>
@@ -99,27 +113,7 @@
 	    					<complexContent>
 	    						<extension base="tns:statementType">
 	    							<sequence>
-	    								<element minOccurs="0" maxOccurs="1" name="responses">
-	    									<annotation>
-	    										<documentation>
-	    											The possible responses for this statement.
-	    											When this element is missing, all responses are considered possible.
-	    											When this element is empty, it expresses that there are no possible responses.
-	    										</documentation>
-	    									</annotation>
-	    									<complexType>
-	    										<sequence>
-	    											<element minOccurs="0" maxOccurs="unbounded" name="response">
-	    												<annotation>
-	    													<documentation>A reference to a player statement.</documentation>
-	    												</annotation>
-	    												<complexType>
-	    													<attribute name="idref" type="string" use="required" />
-	    												</complexType>
-	    											</element>
-	    										</sequence>
-	    									</complexType>
-	    								</element>
+	    								<element ref="tns:responses" />
 	    							</sequence>
 	    						</extension>
 	    					</complexContent>
@@ -173,10 +167,11 @@
 	    					<sequence>
 	    						<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
 	    						<choice maxOccurs="unbounded" minOccurs="1">
+	    							<element name="situationText" type="string" />
 	    							<element name="computerText" type="string" />
 	    							<element name="playerText" type="string" />
 	    						</choice>
-	    						<group ref="tns:nextComputerStatementGroup" />
+	    						<element ref="tns:responses" />
 	    					</sequence>
 	    					<attribute name="id" type="ID" use="required" />
 	    				</complexType>
@@ -197,7 +192,15 @@
 			<selector xpath="./tns:playerStatement" />
 			<field xpath="@id" />
 		</key>
-		<keyref name="startid" refer="tns:computerStatementid">
+		<key name="computerStatementidOrConversationid">
+			<selector xpath="./tns:computerStatement|./tns:conversation" />
+			<field xpath="@id" />
+		</key>
+		<key name="playerStatementidOrConversationid">
+			<selector xpath="./tns:playerStatement|./tns:conversation" />
+			<field xpath="@id" />
+		</key>
+		<keyref name="startid" refer="tns:computerStatementidOrConversationid">
 			<selector xpath="./tns:metadata/tns:start" />
 			<field xpath="@idref" />
 		</keyref>
@@ -209,12 +212,12 @@
 			<selector xpath=".//tns:effect" />
 			<field xpath="@idref" />
 		</keyref>
-		<keyref name="responseid" refer="tns:playerStatementid">
+		<keyref name="responseid" refer="tns:playerStatementidOrConversationid">
 			<selector xpath=".//tns:response" />
 			<field xpath="@idref" />
 		</keyref>
-		<keyref name="nextcomputerStatementid" refer="tns:computerStatementid">
-			<selector xpath=".//tns:nextcomputerStatement" />
+		<keyref name="nextComputerStatementid" refer="tns:computerStatementidOrConversationid">
+			<selector xpath=".//tns:nextComputerStatement" />
 			<field xpath="@idref" />
 		</keyref>
     </element>
@@ -278,18 +281,39 @@
 		</choice>
     </group>
     <group name="nextComputerStatementGroup">
-    <choice>
-		<element name="nextComputerStatement"
-			type="tns:nextComputerStatementType" />
-		<element name="nextComputerStatements">
-	        <complexType>
-	        	<sequence>
-	        		<element
-	        			name="nextComputerStatement"
-	        			type="tns:nextComputerStatementType" maxOccurs="unbounded" minOccurs="0" />
-	        	</sequence>
-	        </complexType>
-		</element>
-	</choice>
+	    <choice>
+			<element name="nextComputerStatement"
+				type="tns:nextComputerStatementType" />
+			<element name="nextComputerStatements">
+		        <complexType>
+		        	<sequence>
+		        		<element
+		        			name="nextComputerStatement"
+		        			type="tns:nextComputerStatementType" maxOccurs="unbounded" minOccurs="0" />
+		        	</sequence>
+		        </complexType>
+			</element>
+		</choice>
     </group>
+
+    <element name="responses">
+    	<complexType>
+    		<sequence>
+    			<element minOccurs="0" maxOccurs="unbounded" name="response">
+			    	<annotation>
+						<documentation>
+							The possible responses for this	statement. When this element is missing,
+							all responses are considered possible. When this element is empty, it expresses
+							that there are no possible responses.
+						</documentation>
+					</annotation>
+    				<complexType>
+    					<attribute use="required" name="idref"
+    						type="string">
+    					</attribute>
+    				</complexType>
+    			</element>
+    		</sequence>
+    	</complexType>
+    </element>
 </schema>
