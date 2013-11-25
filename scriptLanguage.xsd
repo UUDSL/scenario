@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="4">
+	version="5">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -120,6 +120,14 @@
 														<documentation>
 															A human-readable name for the
 															parameter.
+														</documentation>
+													</annotation>
+												</attribute>
+												<attribute name="initialValue" type="int" use="optional">
+													<annotation>
+														<documentation>
+															The initial value of the parameter.
+															When missing, the initial value is 0.
 														</documentation>
 													</annotation>
 												</attribute>
@@ -292,6 +300,21 @@
 	<complexType name="statementType" abstract="true">
 		<sequence>
 			<element name="text" type="string" />
+			<!-- TODO: This doesn't belong in this schema. Can it be separated out? -->
+			<element name="position" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>
+						The position of an element representing this statement
+						in a graphical editor.
+					</documentation>
+				</annotation>
+				<complexType>
+					<sequence>
+						<element name="x" type="double" />
+						<element name="y" type="double" />
+					</sequence>
+				</complexType>
+			</element>
 			<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
 			<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
 				<annotation>
