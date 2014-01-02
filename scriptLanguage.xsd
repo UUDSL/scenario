@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="5">
+	version="6">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -131,6 +131,14 @@
 														</documentation>
 													</annotation>
 												</attribute>
+												<attribute name="scored" type="boolean" use="optional">
+													<annotation>
+														<documentation>
+															Whether the parameter will be shown on
+															the score screen.
+														</documentation>
+													</annotation>
+												</attribute>
 											</complexType>
 										</element>
 									</sequence>
@@ -174,7 +182,11 @@
 											</annotation>
 											<complexType>
 												<sequence>
-													<element name="intent" type="string" minOccurs="1" maxOccurs="unbounded" />
+													<element name="intent" minOccurs="1" maxOccurs="unbounded">
+                                                        <complexType>
+                                                        	<attribute name="name" type="string" use="required" />
+                                                        </complexType>
+													</element>
 												</sequence>
 											</complexType>
 										</element>
@@ -325,6 +337,13 @@
 			</element>
 		</sequence>
 		<attribute name="id" type="ID" use="required" />
+		<attribute name="possibleEnd" type="boolean" use="optional">
+			<annotation>
+				<documentation>
+					Whether the scenario can end after this statement.
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 	<complexType name="nextComputerStatementType">
 		<attribute name="idref" type="string" use="required" />
