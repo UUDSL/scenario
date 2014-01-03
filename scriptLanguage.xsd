@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="6">
+	version="7">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -242,7 +242,8 @@
 									<element name="computerText" type="string" />
 									<element name="playerText" type="string" />
 								</choice>
-								<element ref="tns:responses" />
+								<group ref="tns:editingDataGroup" />
+                                <element ref="tns:responses" />
 							</sequence>
 							<attribute name="id" type="ID" use="required" />
 						</complexType>
@@ -312,23 +313,10 @@
 	<complexType name="statementType" abstract="true">
 		<sequence>
 			<element name="text" type="string" />
-			<!-- TODO: This doesn't belong in this schema. Can it be separated out? -->
-			<element name="position" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>
-						The position of an element representing this statement
-						in a graphical editor.
-					</documentation>
-				</annotation>
-				<complexType>
-					<sequence>
-						<element name="x" type="double" />
-						<element name="y" type="double" />
-					</sequence>
-				</complexType>
-			</element>
+			<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
 			<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
-			<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
+			<element minOccurs="0" maxOccurs="1" name="preconditions"
+				type="tns:singleConditionType">
 				<annotation>
 					<documentation>
 						The statement will only be shown when these preconditions evaluate to true.
@@ -392,6 +380,16 @@
 	</group>
 	<group name="scoringFunctionGroup">
 		<choice>
+			<element name="constant">
+				<annotation>
+					<documentation>
+						A scoring function that yields the given value.
+					</documentation>
+				</annotation>
+				<complexType>
+					<attribute name="value" type="int" use="required" />
+				</complexType>
+			</element>
 			<element name="sum" type="tns:scoringFunctionsType">
 				<annotation>
 					<documentation>A sum of scoring functions.</documentation>
@@ -468,6 +466,26 @@
 			</element>
 		</choice>
 	</group>
+	<!-- TODO: This doesn't belong in this schema. Can it be separated out? -->
+	<group name="editingDataGroup">
+		<sequence>
+			<element name="position" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>
+						The position of a shape representing the enclosing element in a graphical
+						editor.
+					</documentation>
+				</annotation>
+				<complexType>
+					<sequence>
+						<element name="x" type="double"></element>
+						<element name="y" type="double"></element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="comment" minOccurs="0" maxOccurs="1" type="string" />
+		</sequence>
+	</group>
 
 	<element name="responses">
 		<annotation>
@@ -486,5 +504,5 @@
 				</element>
 			</sequence>
 		</complexType>
-	</element>
+	</element>	
 </schema>
