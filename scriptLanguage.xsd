@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="8">
+	version="9">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -144,6 +144,14 @@
 									</sequence>
 								</complexType>
 							</element>
+							<element name="scoringFunction" type="tns:singleScoringFunctionType">
+								<annotation>
+									<documentation>
+										A function that determines the player's score based	on
+										parameter values.
+									</documentation>
+								</annotation>
+							</element>
 						</sequence>
 					</complexType>
 				</element>
@@ -247,14 +255,6 @@
 						</complexType>
 					</element>
 				</choice>
-				<element name="scoringFunction" type="tns:singleScoringFunctionType">
-					<annotation>
-						<documentation>
-							A function that determines the player's score based	on parameter
-							values.
-						</documentation>
-					</annotation>
-				</element>
 			</sequence>
 		</complexType>
 
