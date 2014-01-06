@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="7">
+	version="8">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -182,10 +182,8 @@
 											</annotation>
 											<complexType>
 												<sequence>
-													<element name="intent" minOccurs="1" maxOccurs="unbounded">
-                                                        <complexType>
-                                                        	<attribute name="name" type="string" use="required" />
-                                                        </complexType>
+													<element name="intent" type="string"
+														minOccurs="1" maxOccurs="unbounded">
 													</element>
 												</sequence>
 											</complexType>
