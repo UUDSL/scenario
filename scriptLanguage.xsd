@@ -3,11 +3,11 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="9">
+	version="10">
 	<element name="script">
 		<complexType>
 			<sequence>
-				<element name="metadata" maxOccurs="1" minOccurs="1">
+				<element name="metadata">
 					<annotation>
 						<documentation>
 							Data that describes the script, but is not part of it.
@@ -58,6 +58,21 @@
 										<enumeration value="very_difficult" />
 									</restriction>
 								</simpleType>
+							</element>
+							<element name="characterImage" minOccurs="0" maxOccurs="1" type="string">
+								<annotation>
+									<documentation>
+										The image to be displayed with the scenario
+										description.
+									</documentation>
+								</annotation>
+							</element>
+							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="string">
+								<annotation>
+									<documentation>
+										The image to be displayed in the scenario list.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="model">
 								<annotation>
@@ -241,17 +256,20 @@
 							</documentation>
 						</annotation>
 						<complexType>
-							<sequence>
-								<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
-								<choice maxOccurs="unbounded" minOccurs="1">
-									<element name="situationText" type="string" />
-									<element name="computerText" type="string" />
-									<element name="playerText" type="string" />
-								</choice>
-								<group ref="tns:editingDataGroup" />
-                                <element ref="tns:responses" />
-							</sequence>
-							<attribute name="id" type="ID" use="required" />
+							<complexContent>
+								<extension base="tns:itemType">
+									<sequence>
+										<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
+										<choice maxOccurs="unbounded" minOccurs="1">
+											<element name="situationText" type="string" />
+											<element name="computerText" type="string" />
+											<element name="playerText" type="string" />
+										</choice>
+										<group ref="tns:editingDataGroup" />
+		                                <element ref="tns:responses" />
+									</sequence>
+								</extension>
+							</complexContent>
 						</complexType>
 					</element>
 				</choice>
@@ -308,20 +326,7 @@
 	<complexType name="scoringFunctionsType">
 		<group ref="tns:scoringFunctionGroup" minOccurs="1" maxOccurs="unbounded" />
 	</complexType>
-	<complexType name="statementType" abstract="true">
-		<sequence>
-			<element name="text" type="string" />
-			<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
-			<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
-			<element minOccurs="0" maxOccurs="1" name="preconditions"
-				type="tns:singleConditionType">
-				<annotation>
-					<documentation>
-						The statement will only be shown when these preconditions evaluate to true.
-					</documentation>
-				</annotation>
-			</element>
-		</sequence>
+	<complexType name="itemType" abstract="true">
 		<attribute name="id" type="ID" use="required" />
 		<attribute name="possibleEnd" type="boolean" use="optional">
 			<annotation>
@@ -330,6 +335,25 @@
 				</documentation>
 			</annotation>
 		</attribute>
+	</complexType>
+	<complexType name="statementType" abstract="true">
+		<complexContent>
+			<extension base="tns:itemType">
+				<sequence>
+					<element name="text" type="string" />
+					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
+					<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
+					<element minOccurs="0" maxOccurs="1" name="preconditions"
+						type="tns:singleConditionType">
+						<annotation>
+							<documentation>
+								The statement will only be shown when these preconditions evaluate to true.
+							</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
 	</complexType>
 	<complexType name="nextComputerStatementType">
 		<attribute name="idref" type="string" use="required" />
