@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="10">
+	version="11">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -59,18 +59,18 @@
 									</restriction>
 								</simpleType>
 							</element>
-							<element name="characterImage" minOccurs="0" maxOccurs="1" type="string">
+							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
+								<annotation>
+									<documentation>
+										The image to be displayed in the scenario list.
+									</documentation>
+								</annotation>
+							</element>
+							<element name="characterImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
 								<annotation>
 									<documentation>
 										The image to be displayed with the scenario
 										description.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="string">
-								<annotation>
-									<documentation>
-										The image to be displayed in the scenario list.
 									</documentation>
 								</annotation>
 							</element>
@@ -259,13 +259,13 @@
 							<complexContent>
 								<extension base="tns:itemType">
 									<sequence>
-										<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
 										<choice maxOccurs="unbounded" minOccurs="1">
 											<element name="situationText" type="string" />
 											<element name="computerText" type="string" />
 											<element name="playerText" type="string" />
 										</choice>
 										<group ref="tns:editingDataGroup" />
+										<element minOccurs="0" maxOccurs="1" ref="tns:media" />
 		                                <element ref="tns:responses" />
 									</sequence>
 								</extension>
@@ -326,6 +326,9 @@
 	<complexType name="scoringFunctionsType">
 		<group ref="tns:scoringFunctionGroup" minOccurs="1" maxOccurs="unbounded" />
 	</complexType>
+	<complexType name="mediaItemType">
+		<attribute name="extid" type="string" use="required" />
+	</complexType>
 	<complexType name="itemType" abstract="true">
 		<attribute name="id" type="ID" use="required" />
 		<attribute name="possibleEnd" type="boolean" use="optional">
@@ -342,7 +345,7 @@
 				<sequence>
 					<element name="text" type="string" />
 					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
-					<group minOccurs="0" maxOccurs="1" ref="tns:mediaGroup" />
+					<element minOccurs="0" maxOccurs="1" ref="tns:media" />
 					<element minOccurs="0" maxOccurs="1" name="preconditions"
 						type="tns:singleConditionType">
 						<annotation>
@@ -449,20 +452,6 @@
 			</element>
 		</choice>
 	</group>
-	<group name="mediaGroup">
-		<choice>
-			<element name="video">
-				<complexType>
-					<attribute name="extid" type="string" use="required" />
-				</complexType>
-			</element>
-			<element name="audio">
-				<complexType>
-					<attribute name="extid" type="string" use="required" />
-				</complexType>
-			</element>
-		</choice>
-	</group>
 	<group name="nextComputerStatementGroup">
 		<choice>
 			<element name="nextComputerStatement" type="tns:nextComputerStatementType">
@@ -509,6 +498,27 @@
 		</sequence>
 	</group>
 
+	<element name="media">
+		<complexType>
+			<sequence>
+				<element name="visuals">
+					<complexType>
+						<choice minOccurs="0" maxOccurs="unbounded">
+							<element name="video" type="tns:mediaItemType" />
+							<element name="image" type="tns:mediaItemType" />
+						</choice>
+					</complexType>
+				</element>
+				<element name="audios">
+					<complexType>
+						<choice minOccurs="0" maxOccurs="unbounded">
+							<element name="audio" type="tns:mediaItemType" />
+						</choice>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
 	<element name="responses">
 		<annotation>
 			<documentation>
