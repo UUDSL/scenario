@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="11">
+	version="12">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -82,18 +82,7 @@
 									</documentation>
 								</annotation>
 								<complexType>
-									<sequence>
-										<element name="premadeModel">
-											<annotation>
-												<documentation>
-													A reference to a premade model.
-												</documentation>
-											</annotation>
-											<complexType>
-												<attribute name="extid" type="ID" use="required" />
-											</complexType>
-										</element>
-									</sequence>
+									<attribute name="extid" type="ID" use="required" />
 								</complexType>
 							</element>
 							<element name="start">
