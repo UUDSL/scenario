@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="12">
+	version="13">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -29,12 +29,15 @@
 									</documentation>
 								</annotation>
 							</element>
-							<element name="date" type="date">
+							<element name="date">
 								<annotation>
 									<documentation>
 										The date the script was	published.
 									</documentation>
 								</annotation>
+								<simpleType>
+									<union memberTypes="date dateTime" />
+								</simpleType>
 							</element>
 							<element name="description" type="string">
 								<annotation>
@@ -155,6 +158,18 @@
 										parameter values.
 									</documentation>
 								</annotation>
+							</element>
+							<element name="scoreExtremes" minOccurs="0" maxOccurs="1">
+								<annotation>
+									<documentation>
+										Precalculated minimum and maximum attainable values for
+										the scoring function over all possible paths in the script.
+									</documentation>
+								</annotation>
+								<complexType>
+									<attribute name="minimum" type="int" use="required" />
+									<attribute name="maximum" type="int" use="required" />
+								</complexType>
 							</element>
 						</sequence>
 					</complexType>
@@ -512,7 +527,6 @@
 		<annotation>
 			<documentation>
 				The possible responses for this statement.
-				When this element is missing, all responses are considered possible.
 				When this element is empty, it expresses that there are no possible responses.
 			</documentation>
 		</annotation>
