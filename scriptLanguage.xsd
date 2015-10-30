@@ -3,7 +3,7 @@
 	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
 	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
 	elementFormDefault="qualified"
-	version="13">
+	version="inbetween">
 	<element name="script">
 		<complexType>
 			<sequence>
@@ -15,7 +15,7 @@
 					</annotation>
 					<complexType>
 						<sequence>
-							<element name="id" type="ID">
+							<element name="id" type="string">
 								<annotation>
 									<documentation>
 										The Ideas-approved ID of the script.
@@ -62,6 +62,27 @@
 									</restriction>
 								</simpleType>
 							</element>
+							<element name="feedback" type="boolean">
+								<!-- TODO: document -->
+							</element>
+							<element name="isSitting" type="boolean">
+								<!-- TODO: document -->
+							</element>
+							<element name="showscore" type="boolean">
+								<!-- TODO: document -->
+							</element>
+							<element name="showfeedback" type="boolean">
+								<!-- TODO: document -->
+							</element>
+							<element name="location" type="string">
+								<!-- TODO: document -->
+							</element>
+							<element name="pet" type="string">
+								<!-- TODO: document -->
+							</element>
+							<element name="version" type="int">
+								<!-- TODO: document -->
+							</element>
 							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
 								<annotation>
 									<documentation>
@@ -86,16 +107,6 @@
 								</annotation>
 								<complexType>
 									<attribute name="extid" type="ID" use="required" />
-								</complexType>
-							</element>
-							<element name="start">
-								<annotation>
-									<documentation>
-										A reference to the first computer sentence of the script.
-									</documentation>
-								</annotation>
-								<complexType>
-									<attribute name="idref" type="IDREF" use="required" />
 								</complexType>
 							</element>
 							<element name="parameters">
@@ -146,6 +157,20 @@
 														</documentation>
 													</annotation>
 												</attribute>
+												<attribute name="minimumScore" type="int" use="required">
+													<!-- TODO: document -->
+												</attribute>
+												<attribute name="maximumScore" type="int" use="required">
+													<!-- TODO: document -->
+												</attribute>
+												<attribute name="parameterDescription" type="string" use="required">
+													<annotation>
+														<documentation>
+															A human-readable description of the
+															parameter.
+														</documentation>
+													</annotation>
+												</attribute>
 											</complexType>
 										</element>
 									</sequence>
@@ -160,6 +185,7 @@
 								</annotation>
 							</element>
 							<element name="scoreExtremes" minOccurs="0" maxOccurs="1">
+								<!-- TODO: alive? -->
 								<annotation>
 									<documentation>
 										Precalculated minimum and maximum attainable values for
@@ -171,115 +197,64 @@
 									<attribute name="maximum" type="int" use="required" />
 								</complexType>
 							</element>
+							<element name="emotions">
+								<!-- TODO: document -->
+								<complexType>
+									<attribute name="simpleEmotions" type="boolean" use="required" />
+									<attribute name="persistentEmotions" type="boolean" use="required" />
+								</complexType>
+							</element>
 						</sequence>
 					</complexType>
 				</element>
-				<choice maxOccurs="unbounded" minOccurs="0">
-					<element name="computerStatement">
-						<annotation>
-							<documentation>
-								A statement of the computer character.
-							</documentation>
-						</annotation>
-						<complexType>
-							<complexContent>
-								<extension base="tns:statementType">
+				<element name="feedbackform">
+					<!-- TODO: document -->
+					<complexType>
+						<sequence>
+							<element name="parameter" minOccurs="0" maxOccurs="unbounded">
+								<complexType>
 									<sequence>
-										<element ref="tns:responses" />
-									</sequence>
-								</extension>
-							</complexContent>
-						</complexType>
-					</element>
-					<element name="playerStatement">
-						<annotation>
-							<documentation>
-								A statement of the player character.
-							</documentation>
-						</annotation>
-						<complexType>
-							<complexContent>
-								<extension base="tns:statementType">
-									<sequence>
-										<element name="intents" minOccurs="0" maxOccurs="1">
-											<annotation>
-												<documentation>
-													A list of intents of this statement.
-												</documentation>
-											</annotation>
+										<element name="condition" minOccurs="0" maxOccurs="unbounded">
 											<complexType>
-												<sequence>
-													<element name="intent" type="string"
-														minOccurs="1" maxOccurs="unbounded">
-													</element>
-												</sequence>
+												<simpleContent>
+													<extension base="string">
+														<attribute name="test" type="string" use="required" />
+														<attribute name="value" type="int" use="optional" />
+														<attribute name="lowerBound" type="int" use="optional" />
+														<attribute name="upperBound" type="int" use="optional" />
+													</extension>
+												</simpleContent>
 											</complexType>
 										</element>
-										<element name="effects" minOccurs="0" maxOccurs="1">
-											<annotation>
-												<documentation>
-													A list of effects of this statement on
-													the	parameters.
-												</documentation>
-											</annotation>
-											<complexType>
-												<sequence>
-													<element name="effect" maxOccurs="unbounded" minOccurs="0">
-														<annotation>
-															<documentation>
-																An effect of this statement
-																on a parameter.
-															</documentation>
-														</annotation>
-														<complexType>
-															<attribute name="idref" type="IDREF" use="required" />
-															<attribute name="changeType" use="required">
-																<simpleType>
-																	<restriction base="string">
-																		<enumeration value="set" />
-																		<enumeration value="delta" />
-																	</restriction>
-																</simpleType>
-															</attribute>
-															<attribute name="value" type="string" use="required" />
-														</complexType>
-													</element>
-												</sequence>
-											</complexType>
-										</element>
-										<group ref="tns:nextComputerStatementGroup" />
+										<element name="default" minOccurs="0" maxOccurs="1" />
 									</sequence>
-								</extension>
-							</complexContent>
-						</complexType>
-					</element>
-					<element name="conversation">
-						<annotation>
-							<documentation>
-								A sequence of statements to be displayed in succession.
-							</documentation>
-						</annotation>
-						<complexType>
-							<complexContent>
-								<extension base="tns:itemType">
+									<attribute name="id" use="required" />
+								</complexType>
+							</element>
+							<element name="default" minOccurs="0" maxOccurs="unbounded">
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="sequence">
+					<complexType>
+						<sequence>
+							<element name="interleave" minOccurs="0" maxOccurs="unbounded">
+								<complexType>
 									<sequence>
-										<choice maxOccurs="unbounded" minOccurs="1">
-											<element name="situationText" type="string" />
-											<element name="computerText" type="string" />
-											<element name="playerText" type="string" />
-										</choice>
-										<group ref="tns:editingDataGroup" />
-										<element minOccurs="0" maxOccurs="1" ref="tns:media" />
-		                                <element ref="tns:responses" />
+										<element ref="tns:tree" minOccurs="1" maxOccurs="unbounded" />
 									</sequence>
-								</extension>
-							</complexContent>
-						</complexType>
-					</element>
-				</choice>
+									<attribute name="level" type="int" use="required" />
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
 			</sequence>
 		</complexType>
 
+		<!-- TODO: keys and keyrefs are off -->
+		<!--
 		<key name="parameterid">
 			<selector xpath="./tns:metadata/tns:parameters/tns:parameter" />
 			<field xpath="@id" />
@@ -316,6 +291,7 @@
 			<selector xpath=".//tns:nextComputerStatement" />
 			<field xpath="@idref" />
 		</keyref>
+		-->
 	</element>
 
 	<complexType name="singleConditionType">
@@ -342,6 +318,8 @@
 				</documentation>
 			</annotation>
 		</attribute>
+		<attribute name="jumpPoint" type="boolean" />
+		<attribute name="inits" type="boolean" />
 	</complexType>
 	<complexType name="statementType" abstract="true">
 		<complexContent>
@@ -349,6 +327,8 @@
 				<sequence>
 					<element name="text" type="string" />
 					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
+					<!-- TODO: not in computerStatements? -->
+					<element name="feedback" minOccurs="0" maxOccurs="1" type="string" />
 					<element minOccurs="0" maxOccurs="1" ref="tns:media" />
 					<element minOccurs="0" maxOccurs="1" name="preconditions"
 						type="tns:singleConditionType">
@@ -502,6 +482,159 @@
 		</sequence>
 	</group>
 
+	<element name="tree">
+		<complexType>
+			<sequence>
+				<element name="subject" type="string" />
+				<group ref="tns:editingDataGroup" />
+				<element name="start" minOccurs="0" maxOccurs="unbounded">
+					<!-- TODO: minOccurs -->
+					<!-- TODO: document -->
+					<complexType>
+						<attribute name="idref" type="IDREF" use="required" />
+					</complexType>
+				</element>
+				<choice maxOccurs="unbounded" minOccurs="0">
+					<element name="computerStatement">
+						<annotation>
+							<documentation>
+								A statement of the computer character.
+							</documentation>
+						</annotation>
+						<complexType>
+							<complexContent>
+								<extension base="tns:statementType">
+									<sequence>
+										<element ref="tns:responses" />
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+					<element name="playerStatement">
+						<annotation>
+							<documentation>
+								A statement of the player character.
+							</documentation>
+						</annotation>
+						<complexType>
+							<complexContent>
+								<extension base="tns:statementType">
+									<sequence>
+										<element name="intents" minOccurs="0" maxOccurs="1">
+											<annotation>
+												<documentation>
+													A list of intents of this statement.
+												</documentation>
+											</annotation>
+											<complexType>
+												<sequence>
+													<element name="intent" type="string"
+														minOccurs="1" maxOccurs="unbounded">
+													</element>
+												</sequence>
+											</complexType>
+										</element>
+										<element name="parameterEffects" minOccurs="0" maxOccurs="1">
+											<annotation>
+												<documentation>
+													A list of effects of this statement on
+													the	parameters.
+												</documentation>
+											</annotation>
+											<complexType>
+												<sequence>
+													<element name="parameterEffect" maxOccurs="unbounded" minOccurs="0">
+														<annotation>
+															<documentation>
+																An effect of this statement
+																on a parameter.
+															</documentation>
+														</annotation>
+														<complexType>
+															<attribute name="idref" type="IDREF" use="required" />
+															<attribute name="changeType" use="required">
+																<simpleType>
+																	<restriction base="string">
+																		<enumeration value="set" />
+																		<enumeration value="delta" />
+																	</restriction>
+																</simpleType>
+															</attribute>
+															<attribute name="value" type="string" use="required" />
+														</complexType>
+													</element>
+												</sequence>
+											</complexType>
+										</element>
+										<element name="emotionEffects" minOccurs="0" maxOccurs="1">
+											<annotation>
+												<documentation>
+													A list of effects of this statement on
+													the	emotions.
+												</documentation>
+											</annotation>
+											<complexType>
+												<sequence>
+													<element name="emotionEffect" maxOccurs="unbounded" minOccurs="0">
+														<annotation>
+															<documentation>
+																An effect of this statement
+																on a parameter.
+															</documentation>
+														</annotation>
+														<complexType>
+															<attribute name="emotionid" type="IDREF" use="required" />
+															<attribute name="changeType" use="required">
+																<simpleType>
+																	<restriction base="string">
+																		<enumeration value="set" />
+																		<enumeration value="delta" />
+																	</restriction>
+																</simpleType>
+															</attribute>
+															<attribute name="value" type="string" use="required" />
+															<attribute name="reset" type="boolean" />
+														</complexType>
+													</element>
+												</sequence>
+											</complexType>
+										</element>
+										<group ref="tns:nextComputerStatementGroup" />
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+					<element name="conversation">
+						<annotation>
+							<documentation>
+								A sequence of statements to be displayed in succession.
+							</documentation>
+						</annotation>
+						<complexType>
+							<complexContent>
+								<extension base="tns:itemType">
+									<sequence>
+										<choice maxOccurs="unbounded" minOccurs="1">
+											<element name="situationText" type="string" />
+											<element name="computerText" type="string" />
+											<element name="playerText" type="string" />
+										</choice>
+										<group ref="tns:editingDataGroup" />
+										<element minOccurs="0" maxOccurs="1" ref="tns:media" />
+		                                <element ref="tns:responses" />
+									</sequence>
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+				</choice>
+			</sequence>
+			<attribute name="id" type="ID" use="required" />
+			<attribute name="optional" type="boolean" use="required" />
+		</complexType>
+	</element>
 	<element name="media">
 		<complexType>
 			<sequence>
@@ -539,5 +672,5 @@
 				</element>
 			</sequence>
 		</complexType>
-	</element>	
+	</element>
 </schema>
