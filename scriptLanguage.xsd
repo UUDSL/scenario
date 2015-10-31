@@ -253,34 +253,38 @@
 			</sequence>
 		</complexType>
 
-		<!-- TODO: keys and keyrefs are off -->
-		<!--
 		<key name="parameterid">
 			<selector xpath="./tns:metadata/tns:parameters/tns:parameter" />
 			<field xpath="@id" />
 		</key>
 		<key name="computerStatementid">
-			<selector xpath="./tns:computerStatement" />
+			<selector xpath=".//tns:computerStatement" />
 			<field xpath="@id" />
 		</key>
 		<key name="playerStatementid">
-			<selector xpath="./tns:playerStatement" />
+			<selector xpath=".//tns:playerStatement" />
 			<field xpath="@id" />
 		</key>
 		<key name="computerStatementidOrConversationid">
-			<selector xpath="./tns:computerStatement|./tns:conversation" />
+			<selector xpath=".//tns:computerStatement|.//tns:conversation" />
 			<field xpath="@id" />
 		</key>
 		<key name="playerStatementidOrConversationid">
-			<selector xpath="./tns:playerStatement|./tns:conversation" />
+			<selector xpath=".//tns:playerStatement|.//tns:conversation" />
 			<field xpath="@id" />
 		</key>
-		<keyref name="startid" refer="tns:computerStatementidOrConversationid">
-			<selector xpath="./tns:metadata/tns:start" />
+		<key name="anyStatementid">
+			<selector xpath=".//tns:playerStatement|.//tns:computerStatement|.//conversation" />
+			<field xpath="@id" />
+		</key>
+
+		<!-- TODO: any statement allowed? -->
+		<keyref name="startid" refer="tns:anyStatementid">
+			<selector xpath=".//tns:start" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
-			<selector xpath=".//tns:condition|.//tns:effect|.//tns:paramRef" />
+			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="responseid" refer="tns:playerStatementidOrConversationid">
@@ -291,7 +295,6 @@
 			<selector xpath=".//tns:nextComputerStatement" />
 			<field xpath="@idref" />
 		</keyref>
-		-->
 	</element>
 
 	<complexType name="singleConditionType">
