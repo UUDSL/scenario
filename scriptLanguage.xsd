@@ -125,14 +125,6 @@
 											</annotation>
 											<complexType>
 												<attribute name="id" type="ID" use="required" />
-												<attribute name="emotionid" type="string" use="optional">
-													<annotation>
-														<documentation>
-															The external ID of the emotion that
-															this parameter represents.
-														</documentation>
-													</annotation>
-												</attribute>
 												<attribute name="name" type="string" use="optional">
 													<annotation>
 														<documentation>
@@ -581,7 +573,7 @@
 														<annotation>
 															<documentation>
 																An effect of this statement
-																on a parameter.
+																on an emotion.
 															</documentation>
 														</annotation>
 														<complexType>
