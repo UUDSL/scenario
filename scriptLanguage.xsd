@@ -231,8 +231,6 @@
 									<attribute name="id" use="required" />
 								</complexType>
 							</element>
-							<element name="default" minOccurs="0" maxOccurs="unbounded">
-							</element>
 						</sequence>
 					</complexType>
 				</element>
