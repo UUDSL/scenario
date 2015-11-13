@@ -155,7 +155,7 @@
 												<attribute name="maximumScore" type="int" use="required">
 													<!-- TODO: document -->
 												</attribute>
-												<attribute name="parameterDescription" type="string" use="required">
+												<attribute name="parameterDescription" type="string" use="optional">
 													<annotation>
 														<documentation>
 															A human-readable description of the
