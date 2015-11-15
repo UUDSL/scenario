@@ -351,7 +351,7 @@
 			<element name="or" type="tns:conditionsType">
 				<annotation>
 					<documentation>
-						A set of conditions, one of which needs to be satisfied.
+						A set of conditions, at least one of which needs to be satisfied.
 					</documentation>
 				</annotation>
 			</element>
