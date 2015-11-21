@@ -83,6 +83,9 @@
 							<element name="version" type="int">
 								<!-- TODO: document -->
 							</element>
+							<element name="startEmotion" minOccurs="0" maxOccurs="1" type="IDREF">
+								<!-- TODO: document -->
+							</element>
 							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
 								<annotation>
 									<documentation>
