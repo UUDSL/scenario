@@ -179,19 +179,6 @@
 									</documentation>
 								</annotation>
 							</element>
-							<element name="scoreExtremes" minOccurs="0" maxOccurs="1">
-								<!-- TODO: alive? -->
-								<annotation>
-									<documentation>
-										Precalculated minimum and maximum attainable values for
-										the scoring function over all possible paths in the script.
-									</documentation>
-								</annotation>
-								<complexType>
-									<attribute name="minimum" type="int" use="required" />
-									<attribute name="maximum" type="int" use="required" />
-								</complexType>
-							</element>
 							<element name="emotions">
 								<!-- TODO: document -->
 								<complexType>
