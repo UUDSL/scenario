@@ -32,7 +32,7 @@
 							<element name="date">
 								<annotation>
 									<documentation>
-										The date the script was	published.
+										The date the script was	saved.
 									</documentation>
 								</annotation>
 								<simpleType>
@@ -43,6 +43,7 @@
 								<annotation>
 									<documentation>
 										A free-form description of the script.
+										Shown when a player starts playing this script.
 									</documentation>
 								</annotation>
 							</element>
@@ -63,28 +64,60 @@
 								</simpleType>
 							</element>
 							<element name="feedback" type="boolean">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										Whether feedback should be shown during the game.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="isSitting" type="boolean">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										Whether the sitting variant of the model should be used.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="showscore" type="boolean">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										Whether the score should be shown on the end screen.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="showfeedback" type="boolean">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										Whether feedback should be shown on the end screen.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="location" type="string">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										The background and foreground to be shown in the game.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="pet" type="string">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										The pet to be shown in the game.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="version" type="int">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										The version of the script structure definition.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="startEmotion" minOccurs="0" maxOccurs="1" type="IDREF">
-								<!-- TODO: document -->
+								<annotation>
+									<documentation>
+										The emotion of the model when the game starts.
+									</documentation>
+								</annotation>
 							</element>
 							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
 								<annotation>
@@ -153,10 +186,22 @@
 													</annotation>
 												</attribute>
 												<attribute name="minimumScore" type="int" use="required">
-													<!-- TODO: document -->
+													<annotation>
+														<documentation>
+															The minimum attainable value of this parameter
+															(according to the script's author).
+															Used to calculate the fractional score.
+														</documentation>
+													</annotation>
 												</attribute>
 												<attribute name="maximumScore" type="int" use="required">
-													<!-- TODO: document -->
+													<annotation>
+														<documentation>
+															The maximum attainable value of this parameter
+															(according to the script's author).
+															Used to calculate the fractional score.
+														</documentation>
+													</annotation>
 												</attribute>
 												<attribute name="parameterDescription" type="string" use="optional">
 													<annotation>
@@ -180,17 +225,33 @@
 								</annotation>
 							</element>
 							<element name="emotions">
-								<!-- TODO: document -->
 								<complexType>
-									<attribute name="simpleEmotions" type="boolean" use="required" />
-									<attribute name="persistentEmotions" type="boolean" use="required" />
+									<attribute name="simpleEmotions" type="boolean" use="required">
+										<annotation>
+											<documentation>
+												Whether emotions are constrained to the one-at-a-time,
+												no values model.
+											</documentation>
+										</annotation>
+									</attribute>
+									<attribute name="persistentEmotions" type="boolean" use="required">
+										<annotation>
+											<documentation>
+												Whether the emotion(s) should remain active indefinitely.
+											</documentation>
+										</annotation>
+									</attribute>
 								</complexType>
 							</element>
 						</sequence>
 					</complexType>
 				</element>
 				<element name="feedbackform">
-					<!-- TODO: document -->
+					<annotation>
+						<documentation>
+							Specification of the parameter-related feedback on the end screen.
+						</documentation>
+					</annotation>
 					<complexType>
 						<sequence>
 							<element name="parameter" minOccurs="0" maxOccurs="unbounded">
@@ -208,7 +269,7 @@
 												</simpleContent>
 											</complexType>
 										</element>
-										<element name="default" minOccurs="0" maxOccurs="1" />
+										<element name="default" minOccurs="0" maxOccurs="1" type="string" />
 									</sequence>
 									<attribute name="id" use="required" />
 								</complexType>
@@ -301,8 +362,24 @@
 				</documentation>
 			</annotation>
 		</attribute>
-		<attribute name="jumpPoint" type="boolean" />
-		<attribute name="inits" type="boolean" />
+		<attribute name="jumpPoint" type="boolean">
+			<annotation>
+				<documentation>
+					Whether it is possible to jump from this node to a node
+					in a different tree in this interleave.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="inits" type="boolean">
+			<annotation>
+				<documentation>
+					If there are different trees in this interleave, whether it is
+					possible to jump from this node to a node in one of those trees;
+					else whether it is possible to jump from this node to a node in
+					a tree in the next interleave.
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 	<complexType name="statementType" abstract="true">
 		<complexContent>
@@ -310,7 +387,6 @@
 				<sequence>
 					<element name="text" type="string" />
 					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
-					<!-- TODO: not in computerStatements? -->
 					<element name="feedback" minOccurs="0" maxOccurs="1" type="string" />
 					<element minOccurs="0" maxOccurs="1" ref="tns:media" />
 					<element minOccurs="0" maxOccurs="1" name="preconditions"
@@ -470,9 +546,12 @@
 			<sequence>
 				<element name="subject" type="string" />
 				<group ref="tns:editingDataGroup" />
-				<element name="start" minOccurs="0" maxOccurs="unbounded">
-					<!-- TODO: minOccurs -->
-					<!-- TODO: document -->
+				<element name="start" minOccurs="1" maxOccurs="unbounded">
+					<annotation>
+						<documentation>
+							An initial node of the tree.
+						</documentation>
+					</annotation>
 					<complexType>
 						<attribute name="idref" type="IDREF" use="required" />
 					</complexType>
@@ -615,7 +694,13 @@
 				</choice>
 			</sequence>
 			<attribute name="id" type="ID" use="required" />
-			<attribute name="optional" type="boolean" use="required" />
+			<attribute name="optional" type="boolean" use="required">
+				<annotation>
+					<documentation>
+						Whether this tree can be skipped.
+					</documentation>
+				</annotation>
+			</attribute>
 		</complexType>
 	</element>
 	<element name="media">
