@@ -376,24 +376,6 @@
 				</documentation>
 			</annotation>
 		</attribute>
-		<attribute name="jumpPoint" type="boolean">
-			<annotation>
-				<documentation>
-					Whether it is possible to jump from this node to a node
-					in a different tree in this interleave.
-				</documentation>
-			</annotation>
-		</attribute>
-		<attribute name="inits" type="boolean">
-			<annotation>
-				<documentation>
-					If there are different trees in this interleave, whether it is
-					possible to jump from this node to a node in one of those trees;
-					else whether it is possible to jump from this node to a node in
-					a tree in the next interleave.
-				</documentation>
-			</annotation>
-		</attribute>
 	</complexType>
 	<complexType name="statementType" abstract="true">
 		<complexContent>
@@ -583,6 +565,24 @@
 									<sequence>
 										<element ref="tns:responses" />
 									</sequence>
+									<attribute name="jumpPoint" type="boolean">
+										<annotation>
+											<documentation>
+												Whether it is possible to jump from this node to a node
+												in a different tree in this interleave.
+											</documentation>
+										</annotation>
+									</attribute>
+									<attribute name="inits" type="boolean">
+										<annotation>
+											<documentation>
+												If there are different trees in this interleave, whether it is
+												possible to jump from this node to a node in one of those trees;
+												else whether it is possible to jump from this node to a node in
+												a tree in the next interleave.
+											</documentation>
+										</annotation>
+									</attribute>
 								</extension>
 							</complexContent>
 						</complexType>
