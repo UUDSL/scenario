@@ -293,7 +293,6 @@
 									<sequence>
 										<element ref="tns:tree" minOccurs="1" maxOccurs="unbounded" />
 									</sequence>
-									<attribute name="level" type="int" use="required" />
 								</complexType>
 							</element>
 						</sequence>
