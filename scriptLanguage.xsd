@@ -272,7 +272,7 @@
 										</element>
 										<element name="default" minOccurs="0" maxOccurs="1" type="string" />
 									</sequence>
-									<attribute name="id" use="required" />
+									<attribute name="idref" type="IDREF" use="required" />
 								</complexType>
 							</element>
 						</sequence>
@@ -333,7 +333,7 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
-			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef" />
+			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef|./tns:feedbackForm/tns:parameter" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="responseid" refer="tns:playerStatementidOrConversationid">
