@@ -204,7 +204,7 @@
 														</documentation>
 													</annotation>
 												</attribute>
-												<attribute name="parameterDescription" type="string" use="optional">
+												<attribute name="description" type="string" use="optional">
 													<annotation>
 														<documentation>
 															A human-readable description of the
