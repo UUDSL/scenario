@@ -247,7 +247,7 @@
 						</sequence>
 					</complexType>
 				</element>
-				<element name="feedbackform">
+				<element name="feedbackForm">
 					<annotation>
 						<documentation>
 							Specification of the parameter-related feedback on the end screen.
