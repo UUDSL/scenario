@@ -113,13 +113,6 @@
 									</documentation>
 								</annotation>
 							</element>
-							<element name="version" type="int">
-								<annotation>
-									<documentation>
-										The version of the script structure definition.
-									</documentation>
-								</annotation>
-							</element>
 							<element name="startEmotion" minOccurs="0" maxOccurs="1" type="IDREF">
 								<annotation>
 									<documentation>
@@ -299,6 +292,14 @@
 					</complexType>
 				</element>
 			</sequence>
+
+			<attribute name="schemaVersion" type="int">
+				<annotation>
+					<documentation>
+						The version of the script structure definition.
+					</documentation>
+				</annotation>
+			</attribute>
 		</complexType>
 
 		<key name="parameterid">
