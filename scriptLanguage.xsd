@@ -293,7 +293,7 @@
 				</element>
 			</sequence>
 
-			<attribute name="schemaVersion" type="int">
+			<attribute name="schemaVersion" type="int" use="required">
 				<annotation>
 					<documentation>
 						The version of the script structure definition.
