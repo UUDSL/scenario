@@ -323,7 +323,7 @@
 			<field xpath="@id" />
 		</key>
 		<key name="anyStatementid">
-			<selector xpath=".//tns:playerStatement|.//tns:computerStatement|.//conversation" />
+			<selector xpath=".//tns:playerStatement|.//tns:computerStatement|.//tns:conversation" />
 			<field xpath="@id" />
 		</key>
 
