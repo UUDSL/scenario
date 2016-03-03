@@ -105,6 +105,14 @@
 									</documentation>
 								</annotation>
 							</element>
+							<element name="defaultChangeType" minOccurs="0" maxOccurs="1" type="tns:changeType">
+								<annotation>
+									<documentation>
+										The changeType to be selected by default for
+										newly created parameter effects.
+									</documentation>
+								</annotation>
+							</element>
 							<element name="version" type="int">
 								<annotation>
 									<documentation>
@@ -337,6 +345,13 @@
 			<field xpath="@idref" />
 		</keyref>
 	</element>
+
+	<simpleType name="changeType">
+		<restriction base="string">
+			<enumeration value="set" />
+			<enumeration value="delta" />
+		</restriction>
+	</simpleType>
 
 	<complexType name="singleConditionType">
 		<group ref="tns:conditionGroup" minOccurs="1" maxOccurs="1" />
@@ -615,14 +630,8 @@
 														</annotation>
 														<complexType>
 															<attribute name="idref" type="IDREF" use="required" />
-															<attribute name="changeType" use="required">
-																<simpleType>
-																	<restriction base="string">
-																		<enumeration value="set" />
-																		<enumeration value="delta" />
-																	</restriction>
-																</simpleType>
-															</attribute>
+															<attribute name="changeType" type="tns:changeType"
+																use="required" />
 															<attribute name="value" type="string" use="required" />
 														</complexType>
 													</element>
@@ -647,14 +656,8 @@
 														</annotation>
 														<complexType>
 															<attribute name="emotionid" type="IDREF" use="required" />
-															<attribute name="changeType" use="required">
-																<simpleType>
-																	<restriction base="string">
-																		<enumeration value="set" />
-																		<enumeration value="delta" />
-																	</restriction>
-																</simpleType>
-															</attribute>
+															<attribute name="changeType" type="tns:changeType"
+																use="required" />
 															<attribute name="value" type="string" use="required" />
 															<attribute name="reset" type="boolean" />
 														</complexType>
