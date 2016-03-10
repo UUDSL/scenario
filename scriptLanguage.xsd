@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://www.projects.science.uu.nl/communicate13/ns/script"
-	xmlns:tns="http://www.projects.science.uu.nl/communicate13/ns/script"
+	targetNamespace="urn:uurage-temporary"
+	xmlns:tns="urn:uurage-temporary"
 	elementFormDefault="qualified"
 	version="inbetween">
 	<element name="script">
@@ -15,13 +15,6 @@
 					</annotation>
 					<complexType>
 						<sequence>
-							<element name="id" type="string">
-								<annotation>
-									<documentation>
-										The Ideas-approved ID of the script.
-									</documentation>
-								</annotation>
-							</element>
 							<element name="name" type="string">
 								<annotation>
 									<documentation>
@@ -63,48 +56,6 @@
 									</restriction>
 								</simpleType>
 							</element>
-							<element name="feedback" type="boolean">
-								<annotation>
-									<documentation>
-										Whether feedback should be shown during the game.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="isSitting" type="boolean">
-								<annotation>
-									<documentation>
-										Whether the sitting variant of the model should be used.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="showscore" type="boolean">
-								<annotation>
-									<documentation>
-										Whether the score should be shown on the end screen.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="showfeedback" type="boolean">
-								<annotation>
-									<documentation>
-										Whether feedback should be shown on the end screen.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="location" type="string">
-								<annotation>
-									<documentation>
-										The background and foreground to be shown in the game.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="pet" type="string">
-								<annotation>
-									<documentation>
-										The pet to be shown in the game.
-									</documentation>
-								</annotation>
-							</element>
 							<element name="defaultChangeType" minOccurs="0" maxOccurs="1" type="tns:changeType">
 								<annotation>
 									<documentation>
@@ -113,37 +64,14 @@
 									</documentation>
 								</annotation>
 							</element>
-							<element name="startEmotion" minOccurs="0" maxOccurs="1" type="IDREF">
+							<element name="character">
 								<annotation>
 									<documentation>
-										The emotion of the model when the game starts.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="bannerImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
-								<annotation>
-									<documentation>
-										The image to be displayed in the scenario list.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="characterImage" minOccurs="0" maxOccurs="1" type="tns:mediaItemType">
-								<annotation>
-									<documentation>
-										The image to be displayed with the scenario
-										description.
-									</documentation>
-								</annotation>
-							</element>
-							<element name="model">
-								<annotation>
-									<documentation>
-										A specification of the model to be used as the
-										representation of the computer character.
+										A specification of the computer character.
 									</documentation>
 								</annotation>
 								<complexType>
-									<attribute name="extid" type="ID" use="required" />
+									<attribute name="id" type="ID" use="required" />
 								</complexType>
 							</element>
 							<element name="parameters">
@@ -224,25 +152,6 @@
 										parameter values.
 									</documentation>
 								</annotation>
-							</element>
-							<element name="emotions">
-								<complexType>
-									<attribute name="simpleEmotions" type="boolean" use="required">
-										<annotation>
-											<documentation>
-												Whether emotions are constrained to the one-at-a-time,
-												no values model.
-											</documentation>
-										</annotation>
-									</attribute>
-									<attribute name="persistentEmotions" type="boolean" use="required">
-										<annotation>
-											<documentation>
-												Whether the emotion(s) should remain active indefinitely.
-											</documentation>
-										</annotation>
-									</attribute>
-								</complexType>
 							</element>
 						</sequence>
 					</complexType>
