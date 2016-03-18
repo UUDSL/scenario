@@ -71,7 +71,7 @@
 									</documentation>
 								</annotation>
 								<complexType>
-									<attribute name="id" type="ID" use="required" />
+									<attribute name="id" type="string" use="required" />
 								</complexType>
 							</element>
 							<element name="parameters">
