@@ -64,16 +64,6 @@
 									</documentation>
 								</annotation>
 							</element>
-							<element name="character">
-								<annotation>
-									<documentation>
-										A specification of the computer character.
-									</documentation>
-								</annotation>
-								<complexType>
-									<attribute name="id" type="string" use="required" />
-								</complexType>
-							</element>
 							<element name="definitions">
 								<complexType>
 									<sequence>
