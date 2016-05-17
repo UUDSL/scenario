@@ -164,10 +164,22 @@
 												</sequence>
 											</complexType>
 										</element>
+										<element name="characters">
+											<complexType>
+												<sequence>
+													<element name="character" minOccurs="0" maxOccurs="unbounded">
+														<complexType>
+															<attribute name="id" type="ID" use="required" />
+														</complexType>
+													</element>
+												</sequence>
+											</complexType>
+										</element>
 									</sequence>
 								</complexType>
 							</element>
 							<element ref="tns:properties" />
+							<element ref="tns:characters" />
 							<element name="scoringFunction" type="tns:singleScoringFunctionType">
 								<annotation>
 									<documentation>
@@ -270,9 +282,13 @@
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
 			<selector xpath="./tns:metadata/tns:properties/tns:property|
+				./tns:metadata/tns:characters/tns:character/tns:properties/tns:property|
 				.//tns:computerStatement/tns:properties/tns:property|
 				.//tns:playerStatement/tns:properties/tns:property|
-				.//tns:conversation/tns:properties/tns:property" />
+				.//tns:conversation/tns:properties/tns:property|
+				.//tns:computerStatement/tns:characters/tns:character/tns:properties/tns:property|
+				.//tns:playerStatement/tns:characters/tns:character/tns:properties/tns:property|
+				.//tns:conversation/tns:characters/tns:character/tns:properties/tns:property" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
@@ -338,6 +354,7 @@
 						</annotation>
 					</element>
 					<element minOccurs="0" maxOccurs="1" ref="tns:properties" />
+					<element minOccurs="0" maxOccurs="1" ref="tns:characters" />
 				</sequence>
 			</extension>
 		</complexContent>
@@ -528,6 +545,14 @@
 											</documentation>
 										</annotation>
 									</attribute>
+									<attribute name="characteridref" type="IDREF">
+										<annotation>
+											<documentation>
+												In a multi-character scenario, the character this statement
+												belongs to.
+											</documentation>
+										</annotation>
+									</attribute>
 								</extension>
 							</complexContent>
 						</complexType>
@@ -670,6 +695,20 @@
 								<attribute name="idref" type="IDREF" use="required" />
 							</extension>
 						</complexContent>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="characters">
+		<complexType>
+			<sequence>
+				<element name="character" minOccurs="0" maxOccurs="unbounded">
+					<complexType>
+						<sequence>
+							<element ref="tns:properties" />
+						</sequence>
+						<attribute name="idref" type="IDREF" use="required" />
 					</complexType>
 				</element>
 			</sequence>
