@@ -246,6 +246,10 @@
 			</attribute>
 		</complexType>
 
+		<key name="characterid">
+			<selector xpath="./tns:metadata/tns:definitions/tns:characters/tns:character" />
+			<field xpath="@id" />
+		</key>
 		<key name="propertyid">
 			<selector xpath="./tns:metadata/tns:definitions/tns:properties/tns:property" />
 			<field xpath="@id" />
@@ -263,6 +267,17 @@
 		<keyref name="startidref" refer="tns:statementid">
 			<selector xpath=".//tns:start" />
 			<field xpath="@idref" />
+		</keyref>
+		<keyref name="characteridref" refer="tns:characterid">
+			<selector xpath="./tns:metadata/tns:characters/tns:character|
+				.//tns:computerStatement/tns:characters/tns:character|
+				.//tns:playerStatement/tns:characters/tns:character|
+				.//tns:conversation/tns:characters/tns:character" />
+			<field xpath="@idref" />
+		</keyref>
+		<keyref name="statementcharacteridref" refer="tns:characterid">
+			<selector xpath=".//tns:computerStatement" />
+			<field xpath="@characteridref" />
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
 			<selector xpath="./tns:metadata/tns:propertyValues/tns:propertyValue|
