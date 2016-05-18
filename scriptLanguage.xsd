@@ -270,13 +270,13 @@
 			<selector xpath=".//tns:playerStatement|.//tns:conversation" />
 			<field xpath="@id" />
 		</key>
-		<key name="anyStatementid">
+		<key name="statementid">
 			<selector xpath=".//tns:playerStatement|.//tns:computerStatement|.//tns:conversation" />
 			<field xpath="@id" />
 		</key>
 
 		<!-- TODO: any statement allowed? -->
-		<keyref name="startid" refer="tns:anyStatementid">
+		<keyref name="startid" refer="tns:statementid">
 			<selector xpath=".//tns:start" />
 			<field xpath="@idref" />
 		</keyref>
@@ -295,12 +295,8 @@
 			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef|./tns:feedbackForm/tns:parameter" />
 			<field xpath="@idref" />
 		</keyref>
-		<keyref name="responseid" refer="tns:playerStatementidOrConversationid">
+		<keyref name="responseid" refer="tns:statementid">
 			<selector xpath=".//tns:response" />
-			<field xpath="@idref" />
-		</keyref>
-		<keyref name="nextComputerStatementid" refer="tns:computerStatementidOrConversationid">
-			<selector xpath=".//tns:nextComputerStatement" />
 			<field xpath="@idref" />
 		</keyref>
 	</element>
@@ -358,9 +354,6 @@
 				</sequence>
 			</extension>
 		</complexContent>
-	</complexType>
-	<complexType name="nextComputerStatementType">
-		<attribute name="idref" type="string" use="required" />
 	</complexType>
 
 	<group name="conditionGroup">
@@ -450,31 +443,6 @@
 						mapping True to 1 and False to 0.
 					</documentation>
 				</annotation>
-			</element>
-		</choice>
-	</group>
-	<group name="nextComputerStatementGroup">
-		<choice>
-			<element name="nextComputerStatement" type="tns:nextComputerStatementType">
-				<annotation>
-					<documentation>
-						The computer statement that follows this player statement.
-					</documentation>
-				</annotation>
-			</element>
-			<element name="nextComputerStatements">
-				<complexType>
-					<sequence>
-						<element name="nextComputerStatement" type="tns:nextComputerStatementType"
-							minOccurs="0" maxOccurs="unbounded">
-							<annotation>
-								<documentation>
-									A computer statement that could follow this player statement.
-								</documentation>
-							</annotation>
-						</element>
-					</sequence>
-				</complexType>
 			</element>
 		</choice>
 	</group>
@@ -634,7 +602,7 @@
 												</sequence>
 											</complexType>
 										</element>
-										<group ref="tns:nextComputerStatementGroup" />
+										<element ref="tns:responses" />
 									</sequence>
 								</extension>
 							</complexContent>
@@ -657,7 +625,7 @@
 										</choice>
 										<group ref="tns:editingDataGroup" />
 										<element minOccurs="0" maxOccurs="1" ref="tns:media" />
-		                                <element ref="tns:responses" />
+										<element ref="tns:responses" />
 									</sequence>
 								</extension>
 							</complexContent>
