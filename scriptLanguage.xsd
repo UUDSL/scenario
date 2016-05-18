@@ -178,7 +178,7 @@
 									</sequence>
 								</complexType>
 							</element>
-							<element ref="tns:properties" />
+							<element ref="tns:propertyValues" />
 							<element ref="tns:characters" />
 							<element name="scoringFunction" type="tns:singleScoringFunctionType">
 								<annotation>
@@ -281,14 +281,14 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
-			<selector xpath="./tns:metadata/tns:properties/tns:property|
-				./tns:metadata/tns:characters/tns:character/tns:properties/tns:property|
-				.//tns:computerStatement/tns:properties/tns:property|
-				.//tns:playerStatement/tns:properties/tns:property|
-				.//tns:conversation/tns:properties/tns:property|
-				.//tns:computerStatement/tns:characters/tns:character/tns:properties/tns:property|
-				.//tns:playerStatement/tns:characters/tns:character/tns:properties/tns:property|
-				.//tns:conversation/tns:characters/tns:character/tns:properties/tns:property" />
+			<selector xpath="./tns:metadata/tns:propertyValues/tns:propertyValue|
+				./tns:metadata/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
+				.//tns:computerStatement/tns:propertyValues/tns:propertyValue|
+				.//tns:playerStatement/tns:propertyValues/tns:propertyValue|
+				.//tns:conversation/tns:propertyValues/tns:propertyValue|
+				.//tns:computerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
+				.//tns:playerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
+				.//tns:conversation/tns:characters/tns:character/tns:propertyValues/tns:propertyValue" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
@@ -349,7 +349,7 @@
 							</documentation>
 						</annotation>
 					</element>
-					<element minOccurs="0" maxOccurs="1" ref="tns:properties" />
+					<element minOccurs="0" maxOccurs="1" ref="tns:propertyValues" />
 					<element minOccurs="0" maxOccurs="1" ref="tns:characters" />
 				</sequence>
 			</extension>
@@ -616,7 +616,7 @@
 			</attribute>
 		</complexType>
 	</element>
-	<element name="properties">
+	<element name="propertyValues">
 		<annotation>
 			<documentation>
 				A list of property values.
@@ -624,7 +624,7 @@
 		</annotation>
 		<complexType>
 			<sequence>
-				<element name="property" maxOccurs="unbounded" minOccurs="0">
+				<element name="propertyValue" maxOccurs="unbounded" minOccurs="0">
 					<annotation>
 						<documentation>
 							A property value.
@@ -647,7 +647,7 @@
 				<element name="character" minOccurs="0" maxOccurs="unbounded">
 					<complexType>
 						<sequence>
-							<element ref="tns:properties" />
+							<element ref="tns:propertyValues" />
 						</sequence>
 						<attribute name="idref" type="IDREF" use="required" />
 					</complexType>
