@@ -575,33 +575,6 @@
 												</sequence>
 											</complexType>
 										</element>
-										<element name="emotionEffects" minOccurs="0" maxOccurs="1">
-											<annotation>
-												<documentation>
-													A list of effects of this statement on
-													the	emotions.
-												</documentation>
-											</annotation>
-											<complexType>
-												<sequence>
-													<element name="emotionEffect" maxOccurs="unbounded" minOccurs="0">
-														<annotation>
-															<documentation>
-																An effect of this statement
-																on an emotion.
-															</documentation>
-														</annotation>
-														<complexType>
-															<attribute name="emotionid" type="IDREF" use="required" />
-															<attribute name="changeType" type="tns:changeType"
-																use="required" />
-															<attribute name="value" type="string" use="required" />
-															<attribute name="reset" type="boolean" />
-														</complexType>
-													</element>
-												</sequence>
-											</complexType>
-										</element>
 										<element ref="tns:responses" />
 									</sequence>
 								</extension>
