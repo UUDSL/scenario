@@ -260,7 +260,7 @@
 		</key>
 
 		<!-- TODO: any statement allowed? -->
-		<keyref name="startid" refer="tns:statementid">
+		<keyref name="startidref" refer="tns:statementid">
 			<selector xpath=".//tns:start" />
 			<field xpath="@idref" />
 		</keyref>
@@ -279,7 +279,7 @@
 			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef|./tns:feedbackForm/tns:parameter" />
 			<field xpath="@idref" />
 		</keyref>
-		<keyref name="responseid" refer="tns:statementid">
+		<keyref name="responseidref" refer="tns:statementid">
 			<selector xpath=".//tns:response" />
 			<field xpath="@idref" />
 		</keyref>
