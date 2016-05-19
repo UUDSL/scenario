@@ -332,24 +332,24 @@
 			</annotation>
 		</attribute>
 	</complexType>
-	<complexType name="statementType" abstract="true">
+	<complexType name="statementType">
 		<complexContent>
 			<extension base="tns:itemType">
 				<sequence>
 					<element name="text" type="string" />
 					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
-					<element name="feedback" minOccurs="0" maxOccurs="1" type="string" />
 					<element minOccurs="0" maxOccurs="1" ref="tns:media" />
-					<element minOccurs="0" maxOccurs="1" name="preconditions"
-						type="tns:singleConditionType">
+					<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
 						<annotation>
 							<documentation>
 								The statement will only be shown when these preconditions evaluate to true.
 							</documentation>
 						</annotation>
 					</element>
-					<element minOccurs="0" maxOccurs="1" ref="tns:propertyValues" />
-					<element minOccurs="0" maxOccurs="1" ref="tns:characters" />
+					<element ref="tns:parameterEffects" />
+					<element ref="tns:propertyValues" />
+					<element ref="tns:characters" />
+					<element ref="tns:responses" />
 				</sequence>
 			</extension>
 		</complexContent>
@@ -491,9 +491,6 @@
 						<complexType>
 							<complexContent>
 								<extension base="tns:statementType">
-									<sequence>
-										<element ref="tns:responses" />
-									</sequence>
 									<attribute name="jumpPoint" type="boolean">
 										<annotation>
 											<documentation>
@@ -524,47 +521,12 @@
 							</complexContent>
 						</complexType>
 					</element>
-					<element name="playerStatement">
+					<element name="playerStatement" type="tns:statementType">
 						<annotation>
 							<documentation>
 								A statement of the player character.
 							</documentation>
 						</annotation>
-						<complexType>
-							<complexContent>
-								<extension base="tns:statementType">
-									<sequence>
-										<element name="parameterEffects" minOccurs="0" maxOccurs="1">
-											<annotation>
-												<documentation>
-													A list of effects of this statement on
-													the	parameters.
-												</documentation>
-											</annotation>
-											<complexType>
-												<sequence>
-													<element name="parameterEffect" maxOccurs="unbounded" minOccurs="0">
-														<annotation>
-															<documentation>
-																An effect of this statement
-																on a parameter.
-															</documentation>
-														</annotation>
-														<complexType>
-															<attribute name="idref" type="IDREF" use="required" />
-															<attribute name="changeType" type="tns:changeType"
-																use="required" />
-															<attribute name="value" type="string" use="required" />
-														</complexType>
-													</element>
-												</sequence>
-											</complexType>
-										</element>
-										<element ref="tns:responses" />
-									</sequence>
-								</extension>
-							</complexContent>
-						</complexType>
 					</element>
 					<element name="conversation">
 						<annotation>
@@ -599,6 +561,32 @@
 					</documentation>
 				</annotation>
 			</attribute>
+		</complexType>
+	</element>
+	<element name="parameterEffects">
+		<annotation>
+			<documentation>
+				A list of effects of this statement on
+				the	parameters.
+			</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="parameterEffect" maxOccurs="unbounded" minOccurs="0">
+					<annotation>
+						<documentation>
+							An effect of this statement
+							on a parameter.
+						</documentation>
+					</annotation>
+					<complexType>
+						<attribute name="idref" type="IDREF" use="required" />
+						<attribute name="changeType" type="tns:changeType"
+							use="required" />
+						<attribute name="value" type="string" use="required" />
+					</complexType>
+				</element>
+			</sequence>
 		</complexType>
 	</element>
 	<element name="propertyValues">
