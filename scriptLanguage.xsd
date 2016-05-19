@@ -534,20 +534,6 @@
 							<complexContent>
 								<extension base="tns:statementType">
 									<sequence>
-										<element name="intents" minOccurs="0" maxOccurs="1">
-											<annotation>
-												<documentation>
-													A list of intents of this statement.
-												</documentation>
-											</annotation>
-											<complexType>
-												<sequence>
-													<element name="intent" type="string"
-														minOccurs="1" maxOccurs="unbounded">
-													</element>
-												</sequence>
-											</complexType>
-										</element>
 										<element name="parameterEffects" minOccurs="0" maxOccurs="1">
 											<annotation>
 												<documentation>
