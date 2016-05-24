@@ -259,7 +259,7 @@
 			<field xpath="@id" />
 		</key>
 		<key name="statementid">
-			<selector xpath=".//tns:playerStatement|.//tns:computerStatement|.//tns:conversation" />
+			<selector xpath=".//tns:playerStatement|.//tns:computerStatement" />
 			<field xpath="@id" />
 		</key>
 
@@ -271,8 +271,7 @@
 		<keyref name="characteridref" refer="tns:characterid">
 			<selector xpath="./tns:metadata/tns:characters/tns:character|
 				.//tns:computerStatement/tns:characters/tns:character|
-				.//tns:playerStatement/tns:characters/tns:character|
-				.//tns:conversation/tns:characters/tns:character" />
+				.//tns:playerStatement/tns:characters/tns:character" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="statementcharacteridref" refer="tns:characterid">
@@ -284,10 +283,8 @@
 				./tns:metadata/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
 				.//tns:computerStatement/tns:propertyValues/tns:propertyValue|
 				.//tns:playerStatement/tns:propertyValues/tns:propertyValue|
-				.//tns:conversation/tns:propertyValues/tns:propertyValue|
 				.//tns:computerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
-				.//tns:playerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
-				.//tns:conversation/tns:characters/tns:character/tns:propertyValues/tns:propertyValue" />
+				.//tns:playerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
@@ -527,29 +524,6 @@
 								A statement of the player character.
 							</documentation>
 						</annotation>
-					</element>
-					<element name="conversation">
-						<annotation>
-							<documentation>
-								A sequence of statements to be displayed in succession.
-							</documentation>
-						</annotation>
-						<complexType>
-							<complexContent>
-								<extension base="tns:itemType">
-									<sequence>
-										<choice maxOccurs="unbounded" minOccurs="1">
-											<element name="situationText" type="string" />
-											<element name="computerText" type="string" />
-											<element name="playerText" type="string" />
-										</choice>
-										<group ref="tns:editingDataGroup" />
-										<element minOccurs="0" maxOccurs="1" ref="tns:media" />
-										<element ref="tns:responses" />
-									</sequence>
-								</extension>
-							</complexContent>
-						</complexType>
 					</element>
 				</choice>
 			</sequence>
