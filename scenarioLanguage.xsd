@@ -285,7 +285,22 @@
 	<complexType name="scoringFunctionsType">
 		<group ref="tns:scoringFunctionGroup" minOccurs="1" maxOccurs="unbounded" />
 	</complexType>
-	<complexType name="itemType" abstract="true">
+	<complexType name="statementType">
+		<sequence>
+			<element name="text" type="string" />
+			<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
+			<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
+				<annotation>
+					<documentation>
+						The statement will only be shown when these preconditions evaluate to true.
+					</documentation>
+				</annotation>
+			</element>
+			<element ref="tns:parameterEffects" />
+			<element ref="tns:propertyValues" />
+			<element ref="tns:characters" />
+			<element ref="tns:responses" />
+		</sequence>
 		<attribute name="id" type="ID" use="required" />
 		<attribute name="possibleEnd" type="boolean" use="optional">
 			<annotation>
@@ -294,27 +309,6 @@
 				</documentation>
 			</annotation>
 		</attribute>
-	</complexType>
-	<complexType name="statementType">
-		<complexContent>
-			<extension base="tns:itemType">
-				<sequence>
-					<element name="text" type="string" />
-					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
-					<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
-						<annotation>
-							<documentation>
-								The statement will only be shown when these preconditions evaluate to true.
-							</documentation>
-						</annotation>
-					</element>
-					<element ref="tns:parameterEffects" />
-					<element ref="tns:propertyValues" />
-					<element ref="tns:characters" />
-					<element ref="tns:responses" />
-				</sequence>
-			</extension>
-		</complexContent>
 	</complexType>
 
 	<group name="conditionGroup">
