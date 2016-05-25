@@ -191,37 +191,6 @@
 						</sequence>
 					</complexType>
 				</element>
-				<element name="feedbackForm">
-					<annotation>
-						<documentation>
-							Specification of the parameter-related feedback on the end screen.
-						</documentation>
-					</annotation>
-					<complexType>
-						<sequence>
-							<element name="parameter" minOccurs="0" maxOccurs="unbounded">
-								<complexType>
-									<sequence>
-										<element name="condition" minOccurs="0" maxOccurs="unbounded">
-											<complexType>
-												<simpleContent>
-													<extension base="string">
-														<attribute name="test" type="string" use="required" />
-														<attribute name="value" type="int" use="optional" />
-														<attribute name="lowerBound" type="int" use="optional" />
-														<attribute name="upperBound" type="int" use="optional" />
-													</extension>
-												</simpleContent>
-											</complexType>
-										</element>
-										<element name="default" minOccurs="0" maxOccurs="1" type="string" />
-									</sequence>
-									<attribute name="idref" type="IDREF" use="required" />
-								</complexType>
-							</element>
-						</sequence>
-					</complexType>
-				</element>
 				<element name="sequence">
 					<complexType>
 						<sequence>
@@ -288,7 +257,7 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
-			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef|./tns:feedbackForm/tns:parameter" />
+			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="responseidref" refer="tns:statementid">
@@ -316,9 +285,6 @@
 	<complexType name="scoringFunctionsType">
 		<group ref="tns:scoringFunctionGroup" minOccurs="1" maxOccurs="unbounded" />
 	</complexType>
-	<complexType name="mediaItemType">
-		<attribute name="extid" type="string" use="required" />
-	</complexType>
 	<complexType name="itemType" abstract="true">
 		<attribute name="id" type="ID" use="required" />
 		<attribute name="possibleEnd" type="boolean" use="optional">
@@ -335,7 +301,6 @@
 				<sequence>
 					<element name="text" type="string" />
 					<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
-					<element minOccurs="0" maxOccurs="1" ref="tns:media" />
 					<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
 						<annotation>
 							<documentation>
@@ -597,27 +562,6 @@
 							<element ref="tns:propertyValues" />
 						</sequence>
 						<attribute name="idref" type="IDREF" use="required" />
-					</complexType>
-				</element>
-			</sequence>
-		</complexType>
-	</element>
-	<element name="media">
-		<complexType>
-			<sequence>
-				<element name="visuals">
-					<complexType>
-						<choice minOccurs="0" maxOccurs="unbounded">
-							<element name="video" type="tns:mediaItemType" />
-							<element name="image" type="tns:mediaItemType" />
-						</choice>
-					</complexType>
-				</element>
-				<element name="audios">
-					<complexType>
-						<choice minOccurs="0" maxOccurs="unbounded">
-							<element name="audio" type="tns:mediaItemType" />
-						</choice>
 					</complexType>
 				</element>
 			</sequence>
