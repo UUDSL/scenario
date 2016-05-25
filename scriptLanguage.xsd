@@ -433,64 +433,74 @@
 			<sequence>
 				<element name="subject" type="string" />
 				<group ref="tns:editingDataGroup" />
-				<element name="start" minOccurs="1" maxOccurs="unbounded">
-					<annotation>
-						<documentation>
-							An initial node of the tree.
-						</documentation>
-					</annotation>
+				<element name="starts">
 					<complexType>
-						<attribute name="idref" type="IDREF" use="required" />
+						<sequence>
+							<element name="start" minOccurs="1" maxOccurs="unbounded">
+								<annotation>
+									<documentation>
+										An initial node of the tree.
+									</documentation>
+								</annotation>
+								<complexType>
+									<attribute name="idref" type="IDREF" use="required" />
+								</complexType>
+							</element>
+						</sequence>
 					</complexType>
 				</element>
-				<choice maxOccurs="unbounded" minOccurs="0">
-					<element name="computerStatement">
-						<annotation>
-							<documentation>
-								A statement of the computer character.
-							</documentation>
-						</annotation>
-						<complexType>
-							<complexContent>
-								<extension base="tns:statementType">
-									<attribute name="jumpPoint" type="boolean">
-										<annotation>
-											<documentation>
-												Whether it is possible to jump from this node to a node
-												in a different tree in this interleave.
-											</documentation>
-										</annotation>
-									</attribute>
-									<attribute name="inits" type="boolean">
-										<annotation>
-											<documentation>
-												If there are different trees in this interleave, whether it is
-												possible to jump from this node to a node in one of those trees;
-												else whether it is possible to jump from this node to a node in
-												a tree in the next interleave.
-											</documentation>
-										</annotation>
-									</attribute>
-									<attribute name="characteridref" type="IDREF">
-										<annotation>
-											<documentation>
-												In a multi-character scenario, the character this statement
-												belongs to.
-											</documentation>
-										</annotation>
-									</attribute>
-								</extension>
-							</complexContent>
-						</complexType>
-					</element>
-					<element name="playerStatement" type="tns:statementType">
-						<annotation>
-							<documentation>
-								A statement of the player character.
-							</documentation>
-						</annotation>
-					</element>
-				</choice>
+				<element name="statements">
+					<complexType>
+						<choice maxOccurs="unbounded" minOccurs="0">
+							<element name="computerStatement">
+								<annotation>
+									<documentation>
+										A statement of the computer character.
+									</documentation>
+								</annotation>
+								<complexType>
+									<complexContent>
+										<extension base="tns:statementType">
+											<attribute name="jumpPoint" type="boolean">
+												<annotation>
+													<documentation>
+														Whether it is possible to jump from this node to a node
+														in a different tree in this interleave.
+													</documentation>
+												</annotation>
+											</attribute>
+											<attribute name="inits" type="boolean">
+												<annotation>
+													<documentation>
+														If there are different trees in this interleave, whether it is
+														possible to jump from this node to a node in one of those trees;
+														else whether it is possible to jump from this node to a node in
+														a tree in the next interleave.
+													</documentation>
+												</annotation>
+											</attribute>
+											<attribute name="characteridref" type="IDREF">
+												<annotation>
+													<documentation>
+														In a multi-character scenario, the character this statement
+														belongs to.
+													</documentation>
+												</annotation>
+											</attribute>
+										</extension>
+									</complexContent>
+								</complexType>
+							</element>
+							<element name="playerStatement" type="tns:statementType">
+								<annotation>
+									<documentation>
+										A statement of the player character.
+									</documentation>
+								</annotation>
+							</element>
+						</choice>
+					</complexType>
+				</element>
 			</sequence>
 			<attribute name="id" type="ID" use="required" />
 			<attribute name="optional" type="boolean" use="required">
