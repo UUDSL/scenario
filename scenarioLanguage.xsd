@@ -179,7 +179,6 @@
 								</complexType>
 							</element>
 							<element ref="tns:propertyValues" />
-							<element ref="tns:characters" />
 							<element name="scoringFunction" type="tns:singleScoringFunctionType">
 								<annotation>
 									<documentation>
@@ -243,17 +242,17 @@
 				.//tns:playerStatement/tns:characters/tns:character" />
 			<field xpath="@idref" />
 		</keyref>
-		<keyref name="statementcharacteridref" refer="tns:characterid">
-			<selector xpath=".//tns:computerStatement" />
+		<keyref name="secondarycharacteridref" refer="tns:characterid">
+			<selector xpath=".//tns:computerStatement|.//tns:characterPropertyValue" />
 			<field xpath="@characteridref" />
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
 			<selector xpath="./tns:metadata/tns:propertyValues/tns:propertyValue|
-				./tns:metadata/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
+				./tns:metadata/tns:propertyValues/tns:characterPropertyValue|
 				.//tns:computerStatement/tns:propertyValues/tns:propertyValue|
+				.//tns:computerStatement/tns:propertyValues/tns:characterPropertyValue|
 				.//tns:playerStatement/tns:propertyValues/tns:propertyValue|
-				.//tns:computerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue|
-				.//tns:playerStatement/tns:characters/tns:character/tns:propertyValues/tns:propertyValue" />
+				.//tns:playerStatement/tns:propertyValues/tns:characterPropertyValue" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
@@ -298,7 +297,6 @@
 			</element>
 			<element ref="tns:parameterEffects" />
 			<element ref="tns:propertyValues" />
-			<element ref="tns:characters" />
 			<element ref="tns:responses" />
 		</sequence>
 		<attribute name="id" type="ID" use="required" />
@@ -539,8 +537,8 @@
 			</documentation>
 		</annotation>
 		<complexType>
-			<sequence>
-				<element name="propertyValue" maxOccurs="unbounded" minOccurs="0">
+			<choice minOccurs="0" maxOccurs="unbounded">
+				<element name="propertyValue">
 					<annotation>
 						<documentation>
 							A property value.
@@ -554,22 +552,32 @@
 						</complexContent>
 					</complexType>
 				</element>
-			</sequence>
-		</complexType>
-	</element>
-	<element name="characters">
-		<complexType>
-			<sequence>
-				<element name="character" minOccurs="0" maxOccurs="unbounded">
+				<element name="characterPropertyValue">
+					<annotation>
+						<documentation>
+							A character property value.
+						</documentation>
+					</annotation>
 					<complexType>
-						<sequence>
-							<element ref="tns:propertyValues" />
-						</sequence>
-						<attribute name="idref" type="IDREF" use="required" />
+						<complexContent>
+							<extension base="anyType">
+								<attribute name="idref" type="IDREF" use="required" />
+								<attribute name="characteridref" type="IDREF" use="required" />
+							</extension>
+						</complexContent>
 					</complexType>
 				</element>
-			</sequence>
+			</choice>
 		</complexType>
+		<unique name="propertyValueunique">
+			<selector xpath="./tns:propertyValue" />
+			<field xpath="@idref" />
+		</unique>
+		<unique name="characterPropertyValueunique">
+			<selector xpath="./tns:characterPropertyValue" />
+			<field xpath="@idref" />
+			<field xpath="@characteridref" />
+		</unique>
 	</element>
 	<element name="responses">
 		<annotation>
