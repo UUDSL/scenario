@@ -328,10 +328,10 @@
 			<element ref="tns:responses" />
 		</sequence>
 		<attribute name="id" type="ID" use="required" />
-		<attribute name="possibleEnd" type="boolean" use="optional">
+		<attribute name="end" type="boolean" use="optional">
 			<annotation>
 				<documentation>
-					Whether the scenario can end after this statement.
+					Whether the scenario ends after this statement.
 				</documentation>
 			</annotation>
 		</attribute>
