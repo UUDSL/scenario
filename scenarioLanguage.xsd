@@ -67,26 +67,11 @@
 							<element name="definitions">
 								<complexType>
 									<sequence>
-										<element name="properties">
-											<annotation>
-												<documentation>
-													A list of all properties referenced in the scenario.
-												</documentation>
-											</annotation>
+										<element name="characters">
 											<complexType>
 												<sequence>
-													<element name="property" maxOccurs="unbounded" minOccurs="0">
-														<annotation>
-															<documentation>
-																A property to be referenced in the scenario.
-															</documentation>
-														</annotation>
+													<element name="character" minOccurs="0" maxOccurs="unbounded">
 														<complexType>
-															<choice>
-																<element name="typeString" />
-																<element name="typeInteger" />
-																<element name="typeBoolean" />
-															</choice>
 															<attribute name="id" type="ID" use="required" />
 														</complexType>
 													</element>
@@ -101,7 +86,7 @@
 											</annotation>
 											<complexType>
 												<sequence>
-													<element name="userDefined" minOccurs="1" maxOccurs="1">
+													<element name="userDefined">
 														<complexType>
 															<sequence>
 																<element name="parameter" maxOccurs="unbounded" minOccurs="0">
@@ -167,7 +152,7 @@
 															</sequence>
 														</complexType>
 													</element>
-													<element name="fixed" minOccurs="1" maxOccurs="1">
+													<element name="fixed">
 														<complexType>
 															<sequence>
 																<element name="parameter" maxOccurs="unbounded" minOccurs="0">
@@ -191,11 +176,26 @@
 												</sequence>
 											</complexType>
 										</element>
-										<element name="characters">
+										<element name="properties">
+											<annotation>
+												<documentation>
+													A list of all properties referenced in the scenario.
+												</documentation>
+											</annotation>
 											<complexType>
 												<sequence>
-													<element name="character" minOccurs="0" maxOccurs="unbounded">
+													<element name="property" maxOccurs="unbounded" minOccurs="0">
+														<annotation>
+															<documentation>
+																A property to be referenced in the scenario.
+															</documentation>
+														</annotation>
 														<complexType>
+															<choice>
+																<element name="typeString" />
+																<element name="typeInteger" />
+																<element name="typeBoolean" />
+															</choice>
 															<attribute name="id" type="ID" use="required" />
 														</complexType>
 													</element>
@@ -271,7 +271,7 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="secondarycharacteridref" refer="tns:characterid">
-			<selector xpath=".//tns:computerStatement|.//tns:characterPropertyValue" />
+			<selector xpath=".//tns:computerStatement|.//tns:characterPropertyValue|.//tns:characterParameterEffect" />
 			<field xpath="@characteridref" />
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
@@ -284,7 +284,7 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
-			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:paramRef" />
+			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:characterParameterEffect|.//tns:paramRef" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="responseidref" refer="tns:statementid">
@@ -541,18 +541,59 @@
 		</annotation>
 		<complexType>
 			<sequence>
-				<element name="parameterEffect" maxOccurs="unbounded" minOccurs="0">
-					<annotation>
-						<documentation>
-							An effect of this statement
-							on a parameter.
-						</documentation>
-					</annotation>
+				<element name="userDefined">
 					<complexType>
-						<attribute name="idref" type="IDREF" use="required" />
-						<attribute name="changeType" type="tns:changeType"
-							use="required" />
-						<attribute name="value" type="string" use="required" />
+						<sequence>
+							<element name="parameterEffect" maxOccurs="unbounded" minOccurs="0">
+								<annotation>
+									<documentation>
+										An effect of this statement on a parameter.
+									</documentation>
+								</annotation>
+								<complexType>
+									<attribute name="idref" type="IDREF" use="required" />
+									<attribute name="changeType" type="tns:changeType"	use="required" />
+									<attribute name="value" type="string" use="required" />
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="fixed">
+					<complexType>
+						<choice minOccurs="0" maxOccurs="unbounded" >
+							<element name="parameterEffect">
+								<annotation>
+									<documentation>
+										An effect of this statement on a parameter.
+									</documentation>
+								</annotation>
+								<complexType>
+									<complexContent>
+										<extension base="anyType">
+											<attribute name="idref" type="IDREF" use="required" />
+											<attribute name="changeType" type="tns:changeType" use="required" />
+										</extension>
+									</complexContent>
+								</complexType>
+							</element>
+							<element name="characterParameterEffect" >
+								<annotation>
+									<documentation>
+										An effect of this statement on a character parameter.
+									</documentation>
+								</annotation>
+								<complexType>
+									<complexContent>
+										<extension base="anyType">
+											<attribute name="idref" type="IDREF" use="required" />
+											<attribute name="characteridref" type="IDREF" use="required" />
+											<attribute name="changeType" type="tns:changeType" use="required" />
+										</extension>
+									</complexContent>
+								</complexType>
+							</element>
+						</choice>
 					</complexType>
 				</element>
 			</sequence>
