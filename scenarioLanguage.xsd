@@ -265,12 +265,6 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="characteridref" refer="tns:characterid">
-			<selector xpath="./tns:metadata/tns:characters/tns:character|
-				.//tns:computerStatement/tns:characters/tns:character|
-				.//tns:playerStatement/tns:characters/tns:character" />
-			<field xpath="@idref" />
-		</keyref>
-		<keyref name="secondarycharacteridref" refer="tns:characterid">
 			<selector xpath=".//tns:computerStatement|.//tns:characterPropertyValue|.//tns:characterParameterEffect" />
 			<field xpath="@characteridref" />
 		</keyref>
