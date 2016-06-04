@@ -223,7 +223,7 @@
 							<element name="interleave" minOccurs="0" maxOccurs="unbounded">
 								<complexType>
 									<sequence>
-										<element ref="tns:tree" minOccurs="1" maxOccurs="unbounded" />
+										<element ref="tns:dialogue" minOccurs="1" maxOccurs="unbounded" />
 									</sequence>
 								</complexType>
 							</element>
@@ -444,7 +444,7 @@
 		</sequence>
 	</group>
 
-	<element name="tree">
+	<element name="dialogue">
 		<complexType>
 			<sequence>
 				<element name="subject" type="string" />
@@ -455,7 +455,7 @@
 							<element name="start" minOccurs="1" maxOccurs="unbounded">
 								<annotation>
 									<documentation>
-										An initial node of the tree.
+										An initial statement of the dialogue.
 									</documentation>
 								</annotation>
 								<complexType>
@@ -481,17 +481,17 @@
 												<annotation>
 													<documentation>
 														Whether it is possible to jump from this node to a node
-														in a different tree in this interleave.
+														in a different dialogue in this interleave.
 													</documentation>
 												</annotation>
 											</attribute>
 											<attribute name="inits" type="boolean">
 												<annotation>
 													<documentation>
-														If there are different trees in this interleave, whether it is
-														possible to jump from this node to a node in one of those trees;
+														If there are different dialogues in this interleave, whether it is
+														possible to jump from this node to a node in one of those dialogues;
 														else whether it is possible to jump from this node to a node in
-														a tree in the next interleave.
+														a dialogue in the next interleave.
 													</documentation>
 												</annotation>
 											</attribute>
@@ -529,7 +529,7 @@
 			<attribute name="optional" type="boolean" use="required">
 				<annotation>
 					<documentation>
-						Whether this tree can be skipped.
+						Whether this dialogue can be skipped.
 					</documentation>
 				</annotation>
 			</attribute>
