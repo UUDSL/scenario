@@ -163,9 +163,27 @@
 																	</annotation>
 																	<complexType>
 																		<choice>
-																			<element name="typeString" />
-																			<element name="typeInteger" />
-																			<element name="typeBoolean" />
+																			<element name="typeString">
+																				<complexType>
+																					<sequence>
+																						<element name="default" type="string"/>
+																					</sequence>
+																				</complexType>
+																			</element>
+																			<element name="typeInteger">
+																				<complexType>
+																					<sequence>
+																						<element name="default" type="integer"/>
+																					</sequence>
+																				</complexType>
+																			</element>
+																			<element name="typeBoolean">
+																				<complexType>
+																					<sequence>
+																						<element name="default" type="boolean"/>
+																					</sequence>
+																				</complexType>
+																			</element>
 																		</choice>
 																		<attribute name="id" type="ID" use="required" />
 																	</complexType>
