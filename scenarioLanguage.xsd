@@ -155,38 +155,12 @@
 													<element name="fixed">
 														<complexType>
 															<sequence>
-																<element name="parameter" maxOccurs="unbounded" minOccurs="0">
+																<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
 																	<annotation>
 																		<documentation>
 																			A parameter to be referenced in the scenario.
 																		</documentation>
 																	</annotation>
-																	<complexType>
-																		<choice>
-																			<element name="typeString">
-																				<complexType>
-																					<sequence>
-																						<element name="default" type="string"/>
-																					</sequence>
-																				</complexType>
-																			</element>
-																			<element name="typeInteger">
-																				<complexType>
-																					<sequence>
-																						<element name="default" type="integer"/>
-																					</sequence>
-																				</complexType>
-																			</element>
-																			<element name="typeBoolean">
-																				<complexType>
-																					<sequence>
-																						<element name="default" type="boolean"/>
-																					</sequence>
-																				</complexType>
-																			</element>
-																		</choice>
-																		<attribute name="id" type="ID" use="required" />
-																	</complexType>
 																</element>
 															</sequence>
 														</complexType>
@@ -202,20 +176,12 @@
 											</annotation>
 											<complexType>
 												<sequence>
-													<element name="property" maxOccurs="unbounded" minOccurs="0">
+													<element name="property" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
 														<annotation>
 															<documentation>
 																A property to be referenced in the scenario.
 															</documentation>
 														</annotation>
-														<complexType>
-															<choice>
-																<element name="typeString" />
-																<element name="typeInteger" />
-																<element name="typeBoolean" />
-															</choice>
-															<attribute name="id" type="ID" use="required" />
-														</complexType>
 													</element>
 												</sequence>
 											</complexType>
@@ -314,6 +280,32 @@
 		</restriction>
 	</simpleType>
 
+	<complexType name="definitionType">
+		<choice>
+			<element name="typeString">
+				<complexType>
+					<sequence>
+						<element name="default" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="typeInteger">
+				<complexType>
+					<sequence>
+						<element name="default" type="integer"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="typeBoolean">
+				<complexType>
+					<sequence>
+						<element name="default" type="boolean"/>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+		<attribute name="id" type="ID" use="required" />
+	</complexType>
 	<complexType name="singleConditionType">
 		<group ref="tns:conditionGroup" minOccurs="1" maxOccurs="1" />
 	</complexType>
