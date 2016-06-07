@@ -157,14 +157,6 @@
 								</complexType>
 							</element>
 							<element ref="tns:propertyValues" />
-							<element name="scoringFunction" type="tns:singleScoringFunctionType">
-								<annotation>
-									<documentation>
-										A function that determines the player's score based	on
-										parameter values.
-									</documentation>
-								</annotation>
-							</element>
 						</sequence>
 					</complexType>
 				</element>
@@ -279,12 +271,6 @@
 	<complexType name="conditionsType">
 		<group ref="tns:conditionGroup" minOccurs="1" maxOccurs="unbounded" />
 	</complexType>
-	<complexType name="singleScoringFunctionType">
-		<group ref="tns:scoringFunctionGroup" minOccurs="1" maxOccurs="1" />
-	</complexType>
-	<complexType name="scoringFunctionsType">
-		<group ref="tns:scoringFunctionGroup" minOccurs="1" maxOccurs="unbounded" />
-	</complexType>
 	<complexType name="statementType">
 		<sequence>
 			<element name="text" type="string" />
@@ -348,55 +334,6 @@
 					</attribute>
 					<attribute name="value" type="string" use="required" />
 				</complexType>
-			</element>
-		</choice>
-	</group>
-	<group name="scoringFunctionGroup">
-		<choice>
-			<element name="constant">
-				<annotation>
-					<documentation>
-						A scoring function that yields the given value.
-					</documentation>
-				</annotation>
-				<complexType>
-					<attribute name="value" type="int" use="required" />
-				</complexType>
-			</element>
-			<element name="sum" type="tns:scoringFunctionsType">
-				<annotation>
-					<documentation>A sum of scoring functions.</documentation>
-				</annotation>
-			</element>
-			<element name="scale">
-				<annotation>
-					<documentation>A scaling of a scoring function.</documentation>
-				</annotation>
-				<complexType>
-					<complexContent>
-						<extension base="tns:singleScoringFunctionType">
-							<attribute name="scalar" type="int" use="required" />
-						</extension>
-					</complexContent>
-				</complexType>
-			</element>
-			<element name="paramRef">
-				<annotation>
-					<documentation>
-						A scoring function that yields the value of the given parameter.
-					</documentation>
-				</annotation>
-				<complexType>
-					<attribute name="idref" type="IDREF" use="required" />
-				</complexType>
-			</element>
-			<element name="integeredCondition" type="tns:singleConditionType">
-				<annotation>
-					<documentation>
-						A scoring function that converts a condition from Boolean to Int,
-						mapping True to 1 and False to 0.
-					</documentation>
-				</annotation>
 			</element>
 		</choice>
 	</group>
