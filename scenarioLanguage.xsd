@@ -96,54 +96,23 @@
 																		</documentation>
 																	</annotation>
 																	<complexType>
+																		<choice>
+																			<element name="typeString" />
+																			<element name="typeInteger" />
+																			<element name="typeBoolean" />
+																		</choice>
 																		<attribute name="id" type="ID" use="required" />
-																		<attribute name="name" type="string" use="optional">
+																		<attribute name="name" type="string" use="required">
 																			<annotation>
 																				<documentation>
-																					A human-readable name for the
-																					parameter.
-																				</documentation>
-																			</annotation>
-																		</attribute>
-																		<attribute name="initialValue" type="int" use="optional">
-																			<annotation>
-																				<documentation>
-																					The initial value of the parameter.
-																					When missing, the initial value is 0.
-																				</documentation>
-																			</annotation>
-																		</attribute>
-																		<attribute name="scored" type="boolean" use="optional">
-																			<annotation>
-																				<documentation>
-																					Whether the parameter will be shown on
-																					the score screen.
-																				</documentation>
-																			</annotation>
-																		</attribute>
-																		<attribute name="minimumScore" type="int" use="required">
-																			<annotation>
-																				<documentation>
-																					The minimum attainable value of this parameter
-																					(according to the scenario's author).
-																					Used to calculate the fractional score.
-																				</documentation>
-																			</annotation>
-																		</attribute>
-																		<attribute name="maximumScore" type="int" use="required">
-																			<annotation>
-																				<documentation>
-																					The maximum attainable value of this parameter
-																					(according to the scenario's author).
-																					Used to calculate the fractional score.
+																					A human-readable name for the parameter.
 																				</documentation>
 																			</annotation>
 																		</attribute>
 																		<attribute name="description" type="string" use="optional">
 																			<annotation>
 																				<documentation>
-																					A human-readable description of the
-																					parameter.
+																					A human-readable description of the parameter.
 																				</documentation>
 																			</annotation>
 																		</attribute>
@@ -557,39 +526,14 @@
 				<element name="userDefined">
 					<complexType>
 						<sequence>
-							<element name="parameterEffect" maxOccurs="unbounded" minOccurs="0">
-								<annotation>
-									<documentation>
-										An effect of this statement on a parameter.
-									</documentation>
-								</annotation>
-								<complexType>
-									<attribute name="idref" type="IDREF" use="required" />
-									<attribute name="changeType" type="tns:changeType"	use="required" />
-									<attribute name="value" type="string" use="required" />
-								</complexType>
-							</element>
+							<element ref="tns:parameterEffect" minOccurs="0" maxOccurs="unbounded"/>
 						</sequence>
 					</complexType>
 				</element>
 				<element name="fixed">
 					<complexType>
 						<choice minOccurs="0" maxOccurs="unbounded" >
-							<element name="parameterEffect">
-								<annotation>
-									<documentation>
-										An effect of this statement on a parameter.
-									</documentation>
-								</annotation>
-								<complexType>
-									<complexContent>
-										<extension base="anyType">
-											<attribute name="idref" type="IDREF" use="required" />
-											<attribute name="changeType" type="tns:changeType" use="required" />
-										</extension>
-									</complexContent>
-								</complexType>
-							</element>
+							<element ref="tns:parameterEffect"/>
 							<element name="characterParameterEffect" >
 								<annotation>
 									<documentation>
@@ -610,6 +554,21 @@
 					</complexType>
 				</element>
 			</sequence>
+		</complexType>
+	</element>
+	<element name="parameterEffect">
+		<annotation>
+			<documentation>
+				An effect of this statement on a parameter.
+			</documentation>
+		</annotation>
+		<complexType>
+			<complexContent>
+				<extension base="anyType">
+					<attribute name="idref" type="IDREF" use="required" />
+					<attribute name="changeType" type="tns:changeType" use="required" />
+				</extension>
+			</complexContent>
 		</complexType>
 	</element>
 	<element name="propertyValues">
