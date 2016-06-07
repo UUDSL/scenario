@@ -96,26 +96,24 @@
 																		</documentation>
 																	</annotation>
 																	<complexType>
-																		<choice>
-																			<element name="typeString" />
-																			<element name="typeInteger" />
-																			<element name="typeBoolean" />
-																		</choice>
-																		<attribute name="id" type="ID" use="required" />
-																		<attribute name="name" type="string" use="required">
-																			<annotation>
-																				<documentation>
-																					A human-readable name for the parameter.
-																				</documentation>
-																			</annotation>
-																		</attribute>
-																		<attribute name="description" type="string" use="optional">
-																			<annotation>
-																				<documentation>
-																					A human-readable description of the parameter.
-																				</documentation>
-																			</annotation>
-																		</attribute>
+																		<complexContent>
+																			<extension base="tns:definitionType">
+																				<attribute name="name" type="string" use="required">
+																					<annotation>
+																						<documentation>
+																							A human-readable name for the parameter.
+																						</documentation>
+																					</annotation>
+																				</attribute>
+																				<attribute name="description" type="string" use="optional">
+																					<annotation>
+																						<documentation>
+																							A human-readable description of the parameter.
+																						</documentation>
+																					</annotation>
+																				</attribute>
+																			</extension>
+																		</complexContent>
 																	</complexType>
 																</element>
 															</sequence>
