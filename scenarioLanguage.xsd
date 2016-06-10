@@ -262,6 +262,14 @@
 					</sequence>
 				</complexType>
 			</element>
+			<element name="typeEnumeration">
+				<complexType>
+					<sequence>
+						<element name="option" type="string" minOccurs="1" maxOccurs="unbounded"/>
+						<element name="default" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
 		</choice>
 		<attribute name="id" type="ID" use="required" />
 	</complexType>
