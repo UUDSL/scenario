@@ -208,7 +208,7 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="characteridref" refer="tns:characterid">
-			<selector xpath=".//tns:computerStatement|.//tns:characterPropertyValue|.//tns:characterParameterEffect" />
+			<selector xpath=".//tns:computerStatement|.//tns:characterCondition|.//tns:characterPropertyValue|.//tns:characterParameterEffect" />
 			<field xpath="@characteridref" />
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
@@ -223,7 +223,7 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
-			<selector xpath=".//tns:condition|.//tns:parameterEffect|.//tns:characterParameterEffect|.//tns:paramRef" />
+			<selector xpath=".//tns:condition|.//tns:characterCondition|.//tns:parameterEffect|.//tns:characterParameterEffect|.//tns:paramRef" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="responseidref" refer="tns:statementid">
@@ -323,28 +323,48 @@
 			<element name="condition">
 				<annotation>
 					<documentation>
-						A condition that applies a test to a parameter value.
+						A condition that checks a parameter value and the value of the parameter referenced with an operator.
 					</documentation>
 				</annotation>
 				<complexType>
-					<attribute name="idref" type="string" use="required" />
-					<attribute name="test" use="required">
-						<simpleType>
-							<restriction base="string">
-								<enumeration value="equalTo" />
-								<enumeration value="notEqualTo" />
-								<enumeration value="lessThanEqualTo" />
-								<enumeration value="lessThan" />
-								<enumeration value="greaterThan" />
-								<enumeration value="greaterThanEqualTo" />
-							</restriction>
-						</simpleType>
-					</attribute>
-					<attribute name="value" type="string" use="required" />
+					<complexContent>
+						<extension base="anyType">
+							<attribute name="idref" type="string" use="required" />
+							<attribute name="operator" type="tns:relationalOperator" use="required">
+							</attribute>
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="characterCondition">
+				<annotation>
+					<documentation>
+						A condition that checks a parameter value and the value of the parameter of the character referenced with an operator.
+					</documentation>
+				</annotation>
+				<complexType>
+					<complexContent>
+						<extension base="anyType">
+							<attribute name="idref" type="string" use="required" />
+							<attribute name="characteridref" type="string" use="required" />
+							<attribute name="operator" type="tns:relationalOperator" use="required">
+							</attribute>
+						</extension>
+					</complexContent>
 				</complexType>
 			</element>
 		</choice>
 	</group>
+	<simpleType name="relationalOperator">
+		<restriction base="string">
+			<enumeration value="equalTo" />
+			<enumeration value="notEqualTo" />
+			<enumeration value="lessThanEqualTo" />
+			<enumeration value="lessThan" />
+			<enumeration value="greaterThan" />
+			<enumeration value="greaterThanEqualTo" />
+		</restriction>
+	</simpleType>
 	<!-- TODO: This doesn't belong in this schema. Can it be separated out? -->
 	<group name="editingDataGroup">
 		<sequence>
