@@ -182,6 +182,7 @@
 					</documentation>
 				</annotation>
 			</attribute>
+			<attribute name="configidref" type="string" use="required"></attribute>
 		</complexType>
 
 		<key name="characterid">
