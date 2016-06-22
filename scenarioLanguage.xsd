@@ -89,32 +89,12 @@
 													<element name="userDefined">
 														<complexType>
 															<sequence>
-																<element name="parameter" maxOccurs="unbounded" minOccurs="0">
+																<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
 																	<annotation>
 																		<documentation>
-																			A parameter to be referenced in the scenario.
+																			A user-defined parameter to be referenced in the scenario.
 																		</documentation>
 																	</annotation>
-																	<complexType>
-																		<complexContent>
-																			<extension base="tns:definitionType">
-																				<attribute name="name" type="string" use="required">
-																					<annotation>
-																						<documentation>
-																							A human-readable name for the parameter.
-																						</documentation>
-																					</annotation>
-																				</attribute>
-																				<attribute name="description" type="string" use="optional">
-																					<annotation>
-																						<documentation>
-																							A human-readable description of the parameter.
-																						</documentation>
-																					</annotation>
-																				</attribute>
-																			</extension>
-																		</complexContent>
-																	</complexType>
 																</element>
 															</sequence>
 														</complexType>
@@ -125,7 +105,7 @@
 																<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
 																	<annotation>
 																		<documentation>
-																			A parameter to be referenced in the scenario.
+																			A fixed parameter to be referenced in the scenario.
 																		</documentation>
 																	</annotation>
 																</element>
@@ -273,6 +253,20 @@
 			</element>
 		</choice>
 		<attribute name="id" type="ID" use="required" />
+		<attribute name="name" type="string" use="required">
+			<annotation>
+				<documentation>
+					A human-readable name for the definition.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="description" type="string" use="optional">
+			<annotation>
+				<documentation>
+					A human-readable description of the definition.
+				</documentation>
+			</annotation>
+		</attribute>
 	</complexType>
 	<complexType name="singleConditionType">
 		<group ref="tns:conditionGroup" minOccurs="1" maxOccurs="1" />
