@@ -221,49 +221,51 @@
 	</simpleType>
 
 	<complexType name="definitionType">
-		<choice>
-			<element name="typeString">
-				<complexType>
-					<sequence>
-						<element name="default" type="string"/>
-					</sequence>
-				</complexType>
+		<sequence>
+			<element name="description" type="string" minOccurs="0" maxOccurs="1">
+				<annotation>
+					<documentation>
+						A human-readable description of the definition.
+					</documentation>
+				</annotation>
 			</element>
-			<element name="typeInteger">
-				<complexType>
-					<sequence>
-						<element name="default" type="integer"/>
-					</sequence>
-				</complexType>
-			</element>
-			<element name="typeBoolean">
-				<complexType>
-					<sequence>
-						<element name="default" type="boolean"/>
-					</sequence>
-				</complexType>
-			</element>
-			<element name="typeEnumeration">
-				<complexType>
-					<sequence>
-						<element name="option" type="string" minOccurs="1" maxOccurs="unbounded"/>
-						<element name="default" type="string"/>
-					</sequence>
-				</complexType>
-			</element>
-		</choice>
+			<choice>
+				<element name="typeString">
+					<complexType>
+						<sequence>
+							<element name="default" type="string"/>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="typeInteger">
+					<complexType>
+						<sequence>
+							<element name="default" type="integer"/>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="typeBoolean">
+					<complexType>
+						<sequence>
+							<element name="default" type="boolean"/>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="typeEnumeration">
+					<complexType>
+						<sequence>
+							<element name="option" type="string" minOccurs="1" maxOccurs="unbounded"/>
+							<element name="default" type="string"/>
+						</sequence>
+					</complexType>
+				</element>
+			</choice>
+		</sequence>
 		<attribute name="id" type="ID" use="required" />
 		<attribute name="name" type="string" use="required">
 			<annotation>
 				<documentation>
 					A human-readable name for the definition.
-				</documentation>
-			</annotation>
-		</attribute>
-		<attribute name="description" type="string" use="optional">
-			<annotation>
-				<documentation>
-					A human-readable description of the definition.
 				</documentation>
 			</annotation>
 		</attribute>
