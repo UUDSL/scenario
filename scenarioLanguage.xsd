@@ -56,10 +56,10 @@
 									</restriction>
 								</simpleType>
 							</element>
-							<element name="defaultChangeType" minOccurs="0" maxOccurs="1" type="tns:changeType">
+							<element name="defaultOperator" minOccurs="0" maxOccurs="1" type="tns:operator">
 								<annotation>
 									<documentation>
-										The changeType to be selected by default for
+										The operator to be selected by default for
 										newly created parameter effects.
 									</documentation>
 								</annotation>
@@ -213,7 +213,7 @@
 		</keyref>
 	</element>
 
-	<simpleType name="changeType">
+	<simpleType name="operator">
 		<restriction base="string">
 			<enumeration value="set" />
 			<enumeration value="delta" />
@@ -505,7 +505,7 @@
 										<extension base="anyType">
 											<attribute name="idref" type="IDREF" use="required" />
 											<attribute name="characteridref" type="IDREF" use="required" />
-											<attribute name="changeType" type="tns:changeType" use="required" />
+											<attribute name="operator" type="tns:operator" use="required" />
 										</extension>
 									</complexContent>
 								</complexType>
@@ -526,7 +526,7 @@
 			<complexContent>
 				<extension base="anyType">
 					<attribute name="idref" type="IDREF" use="required" />
-					<attribute name="changeType" type="tns:changeType" use="required" />
+					<attribute name="operator" type="tns:operator" use="required" />
 				</extension>
 			</complexContent>
 		</complexType>
