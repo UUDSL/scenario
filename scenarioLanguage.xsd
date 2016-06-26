@@ -56,14 +56,6 @@
 									</restriction>
 								</simpleType>
 							</element>
-							<element name="defaultOperator" minOccurs="0" maxOccurs="1" type="tns:operator">
-								<annotation>
-									<documentation>
-										The operator to be selected by default for
-										newly created parameter effects.
-									</documentation>
-								</annotation>
-							</element>
 							<element name="definitions">
 								<complexType>
 									<sequence>
@@ -213,10 +205,11 @@
 		</keyref>
 	</element>
 
-	<simpleType name="operator">
+	<simpleType name="assignmentOperator">
 		<restriction base="string">
-			<enumeration value="set" />
-			<enumeration value="delta" />
+			<enumeration value="assign" />
+			<enumeration value="addAssign" />
+			<enumeration value="subtractAssign" />
 		</restriction>
 	</simpleType>
 
@@ -505,7 +498,7 @@
 										<extension base="anyType">
 											<attribute name="idref" type="IDREF" use="required" />
 											<attribute name="characteridref" type="IDREF" use="required" />
-											<attribute name="operator" type="tns:operator" use="required" />
+											<attribute name="operator" type="tns:assignmentOperator" use="required" />
 										</extension>
 									</complexContent>
 								</complexType>
@@ -526,7 +519,7 @@
 			<complexContent>
 				<extension base="anyType">
 					<attribute name="idref" type="IDREF" use="required" />
-					<attribute name="operator" type="tns:operator" use="required" />
+					<attribute name="operator" type="tns:assignmentOperator" use="required" />
 				</extension>
 			</complexContent>
 		</complexType>
