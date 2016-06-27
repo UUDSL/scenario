@@ -32,7 +32,7 @@
 									<union memberTypes="date dateTime" />
 								</simpleType>
 							</element>
-							<element name="description" type="string">
+							<element name="description" type="tns:stringWithXMLAttributes">
 								<annotation>
 									<documentation>
 										A free-form description of the scenario.
@@ -215,7 +215,7 @@
 
 	<complexType name="definitionType">
 		<sequence>
-			<element name="description" type="string" minOccurs="0" maxOccurs="1">
+			<element name="description" type="tns:stringWithXMLAttributes" minOccurs="0" maxOccurs="1">
 				<annotation>
 					<documentation>
 						A human-readable description of the definition.
@@ -271,7 +271,7 @@
 	</complexType>
 	<complexType name="statementType">
 		<sequence>
-			<element name="text" type="string" />
+			<element name="text" type="tns:stringWithXMLAttributes" />
 			<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
 			<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
 				<annotation>
@@ -292,6 +292,13 @@
 				</documentation>
 			</annotation>
 		</attribute>
+	</complexType>
+	<complexType name="stringWithXMLAttributes">
+		<simpleContent>
+			<extension base="string">
+				<anyAttribute namespace="http://www.w3.org/XML/1998/namespace" processContents="lax" />
+			</extension>
+		</simpleContent>
 	</complexType>
 
 	<group name="conditionGroup">
@@ -372,7 +379,7 @@
 					</sequence>
 				</complexType>
 			</element>
-			<element name="comment" minOccurs="0" maxOccurs="1" type="string" />
+			<element name="comment" minOccurs="0" maxOccurs="1" type="tns:stringWithXMLAttributes" />
 		</sequence>
 	</group>
 
