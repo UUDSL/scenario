@@ -205,14 +205,6 @@
 		</keyref>
 	</element>
 
-	<simpleType name="assignmentOperator">
-		<restriction base="string">
-			<enumeration value="assign" />
-			<enumeration value="addAssign" />
-			<enumeration value="subtractAssign" />
-		</restriction>
-	</simpleType>
-
 	<complexType name="definitionType">
 		<sequence>
 			<element name="description" type="tns:stringWithXMLAttributes" minOccurs="0" maxOccurs="1">
@@ -272,7 +264,7 @@
 	<complexType name="statementType">
 		<sequence>
 			<element name="text" type="tns:stringWithXMLAttributes" />
-			<group minOccurs="0" maxOccurs="1" ref="tns:editingDataGroup" />
+			<element minOccurs="0" maxOccurs="1" ref="tns:editingData" />
 			<element minOccurs="0" maxOccurs="1" name="preconditions" type="tns:singleConditionType">
 				<annotation>
 					<documentation>
@@ -300,6 +292,16 @@
 			</extension>
 		</simpleContent>
 	</complexType>
+	<simpleType name="relationalOperator">
+		<restriction base="string">
+			<enumeration value="equalTo" />
+			<enumeration value="notEqualTo" />
+			<enumeration value="lessThanEqualTo" />
+			<enumeration value="lessThan" />
+			<enumeration value="greaterThan" />
+			<enumeration value="greaterThanEqualTo" />
+		</restriction>
+	</simpleType>
 
 	<group name="conditionGroup">
 		<choice>
@@ -352,42 +354,39 @@
 			</element>
 		</choice>
 	</group>
-	<simpleType name="relationalOperator">
-		<restriction base="string">
-			<enumeration value="equalTo" />
-			<enumeration value="notEqualTo" />
-			<enumeration value="lessThanEqualTo" />
-			<enumeration value="lessThan" />
-			<enumeration value="greaterThan" />
-			<enumeration value="greaterThanEqualTo" />
-		</restriction>
-	</simpleType>
+
 	<!-- TODO: This doesn't belong in this schema. Can it be separated out? -->
-	<group name="editingDataGroup">
-		<sequence>
-			<element name="position" minOccurs="0" maxOccurs="1">
-				<annotation>
-					<documentation>
-						The position of a shape representing the enclosing element in a graphical
-						editor.
-					</documentation>
-				</annotation>
-				<complexType>
-					<sequence>
-						<element name="x" type="double"></element>
-						<element name="y" type="double"></element>
-					</sequence>
-				</complexType>
-			</element>
-			<element name="comment" minOccurs="0" maxOccurs="1" type="tns:stringWithXMLAttributes" />
-		</sequence>
-	</group>
+	<element name="editingData">
+		<annotation>
+			<documentation>
+				This element contains data that is useful for graphical representation and documentation of the scenario
+			</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="position" minOccurs="0" maxOccurs="1">
+					<annotation>
+						<documentation>
+							The position of a shape representing the enclosing element in a graphical editor.
+						</documentation>
+					</annotation>
+					<complexType>
+						<sequence>
+							<element name="x" type="double"></element>
+							<element name="y" type="double"></element>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="comment" minOccurs="0" maxOccurs="1" type="tns:stringWithXMLAttributes" />
+			</sequence>
+		</complexType>
+	</element>
 
 	<element name="dialogue">
 		<complexType>
 			<sequence>
 				<element name="subject" type="string" />
-				<group ref="tns:editingDataGroup" />
+				<element ref="tns:editingData" />
 				<element name="starts">
 					<complexType>
 						<sequence>
@@ -531,6 +530,13 @@
 			</complexContent>
 		</complexType>
 	</element>
+	<simpleType name="assignmentOperator">
+		<restriction base="string">
+			<enumeration value="assign" />
+			<enumeration value="addAssign" />
+			<enumeration value="subtractAssign" />
+		</restriction>
+	</simpleType>
 	<element name="propertyValues">
 		<annotation>
 			<documentation>
