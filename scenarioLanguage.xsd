@@ -252,7 +252,7 @@
 				<element name="typeInteger">
 					<complexType>
 						<sequence>
-							<element name="default" type="integer"/>
+							<element name="default" type="int"/>
 						</sequence>
 					</complexType>
 				</element>
