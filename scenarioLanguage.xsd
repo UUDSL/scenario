@@ -7,6 +7,78 @@
 	<element name="scenario">
 		<complexType>
 			<sequence>
+				<element name="definitions">
+					<complexType>
+						<sequence>
+							<element name="characters">
+								<complexType>
+									<sequence>
+										<element name="character" minOccurs="0" maxOccurs="unbounded">
+											<complexType>
+												<attribute name="id" type="ID" use="required" />
+											</complexType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+							<element name="parameters">
+								<annotation>
+									<documentation>
+										A list of all parameters referenced in the scenario.
+									</documentation>
+								</annotation>
+								<complexType>
+									<sequence>
+										<element name="userDefined">
+											<complexType>
+												<sequence>
+													<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
+														<annotation>
+															<documentation>
+																A user-defined parameter to be referenced in the scenario.
+															</documentation>
+														</annotation>
+													</element>
+												</sequence>
+											</complexType>
+										</element>
+										<element name="fixed">
+											<complexType>
+												<sequence>
+													<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
+														<annotation>
+															<documentation>
+																A fixed parameter to be referenced in the scenario.
+															</documentation>
+														</annotation>
+													</element>
+												</sequence>
+											</complexType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+							<element name="properties">
+								<annotation>
+									<documentation>
+										A list of all properties referenced in the scenario.
+									</documentation>
+								</annotation>
+								<complexType>
+									<sequence>
+										<element name="property" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
+											<annotation>
+												<documentation>
+													A property to be referenced in the scenario.
+												</documentation>
+											</annotation>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
 				<element name="metadata">
 					<annotation>
 						<documentation>
@@ -55,78 +127,6 @@
 										<enumeration value="very_difficult" />
 									</restriction>
 								</simpleType>
-							</element>
-							<element name="definitions">
-								<complexType>
-									<sequence>
-										<element name="characters">
-											<complexType>
-												<sequence>
-													<element name="character" minOccurs="0" maxOccurs="unbounded">
-														<complexType>
-															<attribute name="id" type="ID" use="required" />
-														</complexType>
-													</element>
-												</sequence>
-											</complexType>
-										</element>
-										<element name="parameters">
-											<annotation>
-												<documentation>
-													A list of all parameters referenced in the scenario.
-												</documentation>
-											</annotation>
-											<complexType>
-												<sequence>
-													<element name="userDefined">
-														<complexType>
-															<sequence>
-																<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
-																	<annotation>
-																		<documentation>
-																			A user-defined parameter to be referenced in the scenario.
-																		</documentation>
-																	</annotation>
-																</element>
-															</sequence>
-														</complexType>
-													</element>
-													<element name="fixed">
-														<complexType>
-															<sequence>
-																<element name="parameter" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
-																	<annotation>
-																		<documentation>
-																			A fixed parameter to be referenced in the scenario.
-																		</documentation>
-																	</annotation>
-																</element>
-															</sequence>
-														</complexType>
-													</element>
-												</sequence>
-											</complexType>
-										</element>
-										<element name="properties">
-											<annotation>
-												<documentation>
-													A list of all properties referenced in the scenario.
-												</documentation>
-											</annotation>
-											<complexType>
-												<sequence>
-													<element name="property" type="tns:definitionType" maxOccurs="unbounded" minOccurs="0">
-														<annotation>
-															<documentation>
-																A property to be referenced in the scenario.
-															</documentation>
-														</annotation>
-													</element>
-												</sequence>
-											</complexType>
-										</element>
-									</sequence>
-								</complexType>
 							</element>
 							<element name="initialParameterValues">
 								<annotation>
@@ -178,16 +178,16 @@
 		</complexType>
 
 		<key name="characterid">
-			<selector xpath="./tns:metadata/tns:definitions/tns:characters/tns:character" />
+			<selector xpath="./tns:definitions/tns:characters/tns:character" />
 			<field xpath="@id" />
 		</key>
 		<key name="propertyid">
-			<selector xpath="./tns:metadata/tns:definitions/tns:properties/tns:property" />
+			<selector xpath="./tns:definitions/tns:properties/tns:property" />
 			<field xpath="@id" />
 		</key>
 		<key name="parameterid">
-			<selector xpath="./tns:metadata/tns:definitions/tns:parameters/tns:userDefined/tns:parameter|
-					./tns:metadata/tns:definitions/tns:parameters/tns:fixed/tns:parameter" />
+			<selector xpath="./tns:definitions/tns:parameters/tns:userDefined/tns:parameter|
+					./tns:definitions/tns:parameters/tns:fixed/tns:parameter" />
 			<field xpath="@id" />
 		</key>
 		<key name="statementid">
