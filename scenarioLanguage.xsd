@@ -128,6 +128,26 @@
 									</sequence>
 								</complexType>
 							</element>
+							<element name="initialParameterValues">
+								<annotation>
+									<documentation>A list of initial parameter values.</documentation>
+								</annotation>
+								<complexType>
+									<sequence>
+										<element name="userDefined" type="tns:simpleParameterValues" />
+										<element name="fixed" type="tns:simpleParameterValues" />
+									</sequence>
+								</complexType>
+								<unique name="parameterValueunique">
+									<selector xpath=".//tns:parameterValue" />
+									<field xpath="@idref" />
+								</unique>
+								<unique name="characterParameterValueunique">
+									<selector xpath=".//tns:characterParameterValue" />
+									<field xpath="@idref" />
+									<field xpath="@characteridref" />
+								</unique>
+							</element>
 							<element ref="tns:propertyValues" />
 						</sequence>
 					</complexType>
@@ -181,7 +201,11 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="characteridref" refer="tns:characterid">
-			<selector xpath=".//tns:computerStatement|.//tns:characterCondition|.//tns:characterPropertyValue|.//tns:characterParameterEffect" />
+			<selector xpath=".//tns:computerStatement|
+				.//tns:characterCondition|
+				.//tns:characterPropertyValue|
+				.//tns:characterParameterValue|
+				.//tns:characterParameterEffect" />
 			<field xpath="@characteridref" />
 		</keyref>
 		<keyref name="propertyidref" refer="tns:propertyid">
@@ -196,7 +220,10 @@
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
-			<selector xpath=".//tns:condition|.//tns:characterCondition|.//tns:parameterEffect|.//tns:characterParameterEffect|.//tns:paramRef" />
+			<selector xpath=".//tns:condition|.//tns:characterCondition|
+				.//tns:parameterValue|.//tns:characterParameterValue|
+				.//tns:parameterEffect|.//tns:characterParameterEffect|
+				.//tns:paramRef" />
 			<field xpath="@idref" />
 		</keyref>
 		<keyref name="responseidref" refer="tns:statementid">
@@ -254,6 +281,29 @@
 				</documentation>
 			</annotation>
 		</attribute>
+	</complexType>
+	<complexType name="simpleParameterValues">
+		<choice minOccurs="0" maxOccurs="unbounded">
+			<element name="parameterValue">
+				<complexType>
+					<complexContent>
+						<extension base="anyType">
+							<attribute name="idref" type="IDREF" use="required" />
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+			<element name="characterParameterValue">
+				<complexType>
+					<complexContent>
+						<extension base="anyType">
+							<attribute name="idref" type="IDREF" use="required" />
+							<attribute name="characteridref" type="IDREF" use="required" />
+						</extension>
+					</complexContent>
+				</complexType>
+			</element>
+		</choice>
 	</complexType>
 	<complexType name="singleConditionType">
 		<group ref="tns:conditionGroup" minOccurs="1" maxOccurs="1" />
