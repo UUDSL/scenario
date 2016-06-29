@@ -167,6 +167,13 @@
 				</element>
 			</sequence>
 
+			<attribute name="version" type="int" use="optional">
+				<annotation>
+					<documentation>
+						The version of the scenario.
+					</documentation>
+				</annotation>
+			</attribute>
 			<attribute name="schemaVersion" type="int" use="required">
 				<annotation>
 					<documentation>
