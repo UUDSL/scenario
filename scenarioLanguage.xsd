@@ -322,7 +322,23 @@
 			</element>
 			<element ref="tns:parameterEffects" />
 			<element ref="tns:propertyValues" />
-			<element ref="tns:responses" />
+			<element name="responses">
+				<annotation>
+					<documentation>
+						The possible responses for this statement.
+						When this element is empty, it expresses that there are no possible responses.
+					</documentation>
+				</annotation>
+				<complexType>
+					<sequence>
+						<element minOccurs="0" maxOccurs="unbounded" name="response">
+							<complexType>
+								<attribute name="idref" type="string" use="required" />
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
 		</sequence>
 		<attribute name="id" type="ID" use="required" />
 		<attribute name="end" type="boolean" use="optional">
@@ -633,22 +649,5 @@
 			<field xpath="@idref" />
 			<field xpath="@characteridref" />
 		</unique>
-	</element>
-	<element name="responses">
-		<annotation>
-			<documentation>
-				The possible responses for this statement.
-				When this element is empty, it expresses that there are no possible responses.
-			</documentation>
-		</annotation>
-		<complexType>
-			<sequence>
-				<element minOccurs="0" maxOccurs="unbounded" name="response">
-					<complexType>
-						<attribute name="idref" type="string" use="required" />
-					</complexType>
-				</element>
-			</sequence>
-		</complexType>
 	</element>
 </schema>
