@@ -16,6 +16,7 @@
 										<element name="character" minOccurs="0" maxOccurs="unbounded">
 											<complexType>
 												<attribute name="id" type="ID" use="required" />
+												<attribute name="name" type="string" use="optional" />
 											</complexType>
 										</element>
 									</sequence>
