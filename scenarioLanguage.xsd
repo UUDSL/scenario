@@ -3,7 +3,7 @@
 	targetNamespace="http://uudsl.github.io/scenario/namespace"
 	xmlns:tns="http://uudsl.github.io/scenario/namespace"
 	elementFormDefault="qualified"
-	version="inbetween">
+	version="4.0.0">
 	<element name="scenario">
 		<complexType>
 			<sequence>
@@ -175,10 +175,10 @@
 					</documentation>
 				</annotation>
 			</attribute>
-			<attribute name="schemaVersion" type="int" use="required">
+			<attribute name="schemaVersion" type="string" use="required">
 				<annotation>
 					<documentation>
-						The version of the scenario structure definition.
+						The UUDSL version.
 					</documentation>
 				</annotation>
 			</attribute>
