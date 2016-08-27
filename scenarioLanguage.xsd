@@ -15,7 +15,7 @@
 									<sequence>
 										<element name="character" minOccurs="0" maxOccurs="unbounded">
 											<complexType>
-												<attribute name="id" type="ID" use="required" />
+												<attribute name="id" type="NCName" use="required" />
 												<attribute name="name" type="string" use="optional" />
 											</complexType>
 										</element>
@@ -242,7 +242,7 @@
 			</element>
 			<element name="type" type="tns:domainDataTypeType" />
 		</sequence>
-		<attribute name="id" type="ID" use="required" />
+		<attribute name="id" type="NCName" use="required" />
 		<attribute name="name" type="string" use="required">
 			<annotation>
 				<documentation>
@@ -298,7 +298,7 @@
 				<complexType>
 					<complexContent>
 						<extension base="anyType">
-							<attribute name="idref" type="IDREF" use="required" />
+							<attribute name="idref" type="NCName" use="required" />
 						</extension>
 					</complexContent>
 				</complexType>
@@ -307,8 +307,8 @@
 				<complexType>
 					<complexContent>
 						<extension base="anyType">
-							<attribute name="idref" type="IDREF" use="required" />
-							<attribute name="characteridref" type="IDREF" use="required" />
+							<attribute name="idref" type="NCName" use="required" />
+							<attribute name="characteridref" type="NCName" use="required" />
 						</extension>
 					</complexContent>
 				</complexType>
@@ -345,14 +345,14 @@
 					<sequence>
 						<element minOccurs="0" maxOccurs="unbounded" name="response">
 							<complexType>
-								<attribute name="idref" type="string" use="required" />
+								<attribute name="idref" type="NCName" use="required" />
 							</complexType>
 						</element>
 					</sequence>
 				</complexType>
 			</element>
 		</sequence>
-		<attribute name="id" type="ID" use="required" />
+		<attribute name="id" type="NCName" use="required" />
 		<attribute name="end" type="boolean" use="optional">
 			<annotation>
 				<documentation>
@@ -404,7 +404,7 @@
 				<complexType>
 					<complexContent>
 						<extension base="anyType">
-							<attribute name="idref" type="string" use="required" />
+							<attribute name="idref" type="NCName" use="required" />
 							<attribute name="operator" type="tns:relationalOperator" use="required">
 							</attribute>
 						</extension>
@@ -420,8 +420,8 @@
 				<complexType>
 					<complexContent>
 						<extension base="anyType">
-							<attribute name="idref" type="string" use="required" />
-							<attribute name="characteridref" type="string" use="required" />
+							<attribute name="idref" type="NCName" use="required" />
+							<attribute name="characteridref" type="NCName" use="required" />
 							<attribute name="operator" type="tns:relationalOperator" use="required">
 							</attribute>
 						</extension>
@@ -473,7 +473,7 @@
 									</documentation>
 								</annotation>
 								<complexType>
-									<attribute name="idref" type="IDREF" use="required" />
+									<attribute name="idref" type="NCName" use="required" />
 								</complexType>
 							</element>
 						</sequence>
@@ -509,7 +509,7 @@
 													</documentation>
 												</annotation>
 											</attribute>
-											<attribute name="characteridref" type="IDREF">
+											<attribute name="characteridref" type="NCName">
 												<annotation>
 													<documentation>
 														In a multi-character scenario, the character this statement
@@ -539,7 +539,7 @@
 					</complexType>
 				</element>
 			</sequence>
-			<attribute name="id" type="ID" use="required" />
+			<attribute name="id" type="NCName" use="required" />
 			<attribute name="optional" type="boolean" use="required">
 				<annotation>
 					<documentation>
@@ -578,8 +578,8 @@
 								<complexType>
 									<complexContent>
 										<extension base="anyType">
-											<attribute name="idref" type="IDREF" use="required" />
-											<attribute name="characteridref" type="IDREF" use="required" />
+											<attribute name="idref" type="NCName" use="required" />
+											<attribute name="characteridref" type="NCName" use="required" />
 											<attribute name="operator" type="tns:assignmentOperator" use="required" />
 										</extension>
 									</complexContent>
@@ -600,7 +600,7 @@
 		<complexType>
 			<complexContent>
 				<extension base="anyType">
-					<attribute name="idref" type="IDREF" use="required" />
+					<attribute name="idref" type="NCName" use="required" />
 					<attribute name="operator" type="tns:assignmentOperator" use="required" />
 				</extension>
 			</complexContent>
@@ -630,7 +630,7 @@
 					<complexType>
 						<complexContent>
 							<extension base="anyType">
-								<attribute name="idref" type="IDREF" use="required" />
+								<attribute name="idref" type="NCName" use="required" />
 							</extension>
 						</complexContent>
 					</complexType>
@@ -644,8 +644,8 @@
 					<complexType>
 						<complexContent>
 							<extension base="anyType">
-								<attribute name="idref" type="IDREF" use="required" />
-								<attribute name="characteridref" type="IDREF" use="required" />
+								<attribute name="idref" type="NCName" use="required" />
+								<attribute name="characteridref" type="NCName" use="required" />
 							</extension>
 						</complexContent>
 					</complexType>
