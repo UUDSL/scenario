@@ -105,6 +105,21 @@
 									<union memberTypes="date dateTime" />
 								</simpleType>
 							</element>
+							<element name="language" minOccurs="0" maxOccurs="1">
+								<annotation>
+									<documentation>
+										Defines the language of the scenario.
+										The language element content is a display name and the code attribute is a language code defined by RFC 1766.
+									</documentation>
+								</annotation>
+								<complexType>
+									<simpleContent>
+										<extension base="string">
+											<attribute name="code" type="language"/>
+										</extension>
+									</simpleContent>
+								</complexType>
+							</element>
 							<element name="description" type="tns:stringWithXMLAttributes">
 								<annotation>
 									<documentation>
