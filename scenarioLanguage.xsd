@@ -128,6 +128,20 @@
 									</documentation>
 								</annotation>
 							</element>
+							<element name="authors" minOccurs="0" maxOccurs="1">
+								<complexType>
+									<sequence>
+										<element name="author" minOccurs="1" maxOccurs="unbounded">
+											<complexType>
+												<attribute name="name" type="string" use="required" />
+												<attribute name="email" type="string" use="optional" />
+												<attribute name="startDate" type="tns:dateOrYearMonthOrYear" use="required" />
+												<attribute name="endDate" type="tns:dateOrYearMonthOrYear" use="optional" />
+											</complexType>
+										</element>
+									</sequence>
+								</complexType>
+							</element>
 							<element name="difficulty">
 								<annotation>
 									<documentation>
@@ -307,6 +321,9 @@
 			</element>
 		</choice>
 	</complexType>
+	<simpleType name="dateOrYearMonthOrYear">
+		<union memberTypes="date gYearMonth gYear" />
+	</simpleType>
 	<complexType name="simpleParameterValues">
 		<choice minOccurs="0" maxOccurs="unbounded">
 			<element name="parameterValue">
