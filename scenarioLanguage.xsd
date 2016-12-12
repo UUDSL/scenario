@@ -134,7 +134,16 @@
 										<element name="author" minOccurs="1" maxOccurs="unbounded">
 											<complexType>
 												<attribute name="name" type="string" use="required" />
-												<attribute name="email" type="string" use="optional" />
+												<attribute name="email" use="optional">
+													<simpleType>
+														<restriction base="string">
+															<annotation>
+																<documentation>https://www.w3.org/TR/html5/forms.html#e-mail-state-(type=email)</documentation>
+															</annotation>
+															<pattern value="[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*"/>
+														</restriction>
+													</simpleType>
+												</attribute>
 												<attribute name="startDate" type="tns:dateOrYearMonthOrYear" use="required" />
 												<attribute name="endDate" type="tns:dateOrYearMonthOrYear" use="optional" />
 											</complexType>
