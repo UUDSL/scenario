@@ -289,34 +289,23 @@
 			</annotation>
 		</attribute>
 	</complexType>
+	<complexType name="simpleDomainDataTypeType">
+		<group ref="tns:simpleDomainDataTypeGroup" />
+	</complexType>
 	<complexType name="domainDataTypeType">
 		<choice>
-			<element name="string">
+			<group ref="tns:simpleDomainDataTypeGroup" />
+			<element name="list">
 				<complexType>
 					<sequence>
-						<element name="default" type="string" minOccurs="0" maxOccurs="1" />
-					</sequence>
-				</complexType>
-			</element>
-			<element name="integer">
-				<complexType>
-					<sequence>
-						<element name="default" type="int" minOccurs="0" maxOccurs="1" />
-					</sequence>
-				</complexType>
-			</element>
-			<element name="boolean">
-				<complexType>
-					<sequence>
-						<element name="default" type="boolean" minOccurs="0" maxOccurs="1" />
-					</sequence>
-				</complexType>
-			</element>
-			<element name="enumeration">
-				<complexType>
-					<sequence>
-						<element name="option" type="string" minOccurs="1" maxOccurs="unbounded" />
-						<element name="default" type="string" minOccurs="0" maxOccurs="1" />
+						<element name="itemType" type="tns:domainDataTypeType" />
+						<element name="default" minOccurs="0" maxOccurs="1">
+							<complexType>
+								<sequence>
+									<element name="item" type="anyType" minOccurs="0" maxOccurs="unbounded" />
+								</sequence>
+							</complexType>
+						</element>
 					</sequence>
 				</complexType>
 			</element>
@@ -467,6 +456,44 @@
 							</attribute>
 						</extension>
 					</complexContent>
+				</complexType>
+			</element>
+		</choice>
+	</group>
+	<group name="simpleDomainDataTypeGroup">
+		<annotation>
+			<documentation>
+				Simple domain data types are types whose values can neatly be stored as a plain string.
+			</documentation>
+		</annotation>
+		<choice>
+			<element name="string">
+				<complexType>
+					<sequence>
+						<element name="default" type="string" minOccurs="0" maxOccurs="1" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="integer">
+				<complexType>
+					<sequence>
+						<element name="default" type="int" minOccurs="0" maxOccurs="1" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="boolean">
+				<complexType>
+					<sequence>
+						<element name="default" type="boolean" minOccurs="0" maxOccurs="1" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="enumeration">
+				<complexType>
+					<sequence>
+						<element name="option" type="string" minOccurs="1" maxOccurs="unbounded" />
+						<element name="default" type="string" minOccurs="0" maxOccurs="1" />
+					</sequence>
 				</complexType>
 			</element>
 		</choice>
