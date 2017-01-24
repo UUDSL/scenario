@@ -309,6 +309,33 @@
 					</sequence>
 				</complexType>
 			</element>
+			<element name="attributeRecord">
+				<complexType>
+					<sequence>
+						<element name="content" minOccurs="0" maxOccurs="1">
+							<complexType>
+								<sequence>
+									<element name="type" type="tns:domainDataTypeType" />
+								</sequence>
+								<attribute name="name" type="NCName" use="required" />
+							</complexType>
+						</element>
+						<element name="attribute" minOccurs="0" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="type" type="tns:simpleDomainDataTypeType" />
+								</sequence>
+								<attribute name="name" type="NCName" use="required" />
+							</complexType>
+						</element>
+						<element name="default" type="anyType" minOccurs="0" maxOccurs="1" />
+					</sequence>
+				</complexType>
+				<unique name="nameunique">
+					<selector xpath="./tns:content|./tns:attribute" />
+					<field xpath="@name" />
+				</unique>
+			</element>
 			<element name="extension">
 				<complexType>
 					<sequence>
