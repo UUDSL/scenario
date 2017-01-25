@@ -506,6 +506,8 @@
 					<sequence>
 						<element name="default" type="int" minOccurs="0" maxOccurs="1" />
 					</sequence>
+					<attribute name="minimum" type="int" use="optional" />
+					<attribute name="maximum" type="int" use="optional" />
 				</complexType>
 			</element>
 			<element name="boolean">
