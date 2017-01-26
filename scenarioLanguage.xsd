@@ -80,6 +80,38 @@
 						</sequence>
 					</complexType>
 				</element>
+				<element name="typedExpressions" minOccurs="0" maxOccurs="1">
+					<annotation>
+						<documentation>A list of typed expressions.</documentation>
+					</annotation>
+					<complexType>
+						<sequence>
+							<element name="typedExpression" minOccurs="0" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element name="description" type="tns:stringWithXMLAttributes" minOccurs="0" maxOccurs="1">
+											<annotation>
+												<documentation>
+													A human-readable description of the typed expression.
+												</documentation>
+											</annotation>
+										</element>
+										<element name="type" type="tns:domainDataTypeType" />
+										<element name="expression" type="tns:singleExpressionType" />
+									</sequence>
+									<attribute name="id" type="NCName" use="required" />
+									<attribute name="name" type="string" use="required">
+										<annotation>
+											<documentation>
+												A human-readable name for the typed expression.
+											</documentation>
+										</annotation>
+									</attribute>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
 				<element name="metadata">
 					<annotation>
 						<documentation>
@@ -236,6 +268,10 @@
 					./tns:definitions/tns:parameters/tns:fixed/tns:parameter" />
 			<field xpath="@id" />
 		</key>
+		<key name="expressionid">
+			<selector xpath="./tns:typedExpressions/tns:typedExpression" />
+			<field xpath="@id" />
+		</key>
 		<key name="statementid">
 			<selector xpath=".//tns:playerStatement|.//tns:computerStatement|.//tns:situationStatement" />
 			<field xpath="@id" />
@@ -372,6 +408,9 @@
 			</element>
 		</choice>
 	</complexType>
+	<complexType name="singleExpressionType">
+		<group ref="tns:expressionGroup" minOccurs="1" maxOccurs="1" />
+	</complexType>
 	<complexType name="singleConditionType">
 		<group ref="tns:conditionGroup" minOccurs="1" maxOccurs="1" />
 	</complexType>
@@ -436,6 +475,50 @@
 		</restriction>
 	</simpleType>
 
+	<group name="expressionGroup">
+		<choice>
+			<element name="literal" type="anyType" />
+			<element name="parameterReference">
+				<complexType>
+					<attribute name="idref" type="NCName" use="required" />
+				</complexType>
+			</element>
+			<element name="characterParameterReference">
+				<complexType>
+					<attribute name="idref" type="NCName" use="required" />
+					<attribute name="characteridref" type="NCName" use="required" />
+				</complexType>
+			</element>
+			<element name="sum">
+				<complexType>
+					<group ref="tns:expressionGroup" minOccurs="0" maxOccurs="unbounded" />
+				</complexType>
+			</element>
+			<element name="scale">
+				<complexType>
+					<group ref="tns:expressionGroup" />
+					<attribute name="scalar" type="int" use="required" />
+					<attribute name="divisor" type="int" use="optional" />
+				</complexType>
+			</element>
+			<element name="choose">
+				<complexType>
+					<sequence>
+						<element name="when" minOccurs="0" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="condition" type="tns:singleConditionType" />
+									<element name="expression" type="tns:singleExpressionType" />
+								</sequence>
+							</complexType>
+						</element>
+						<element name="otherwise" type="tns:singleExpressionType">
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</group>
 	<group name="conditionGroup">
 		<choice>
 			<element name="and" type="tns:conditionsType">
