@@ -284,6 +284,7 @@
 		<keyref name="characteridref" refer="tns:characterid">
 			<selector xpath=".//tns:computerStatement|
 				.//tns:characterCondition|
+				.//tns:characterReferenceCondition|
 				.//tns:characterPropertyValue|
 				.//tns:characterParameterValue|
 				.//tns:characterParameterEffect" />
@@ -295,6 +296,7 @@
 		</keyref>
 		<keyref name="parameteridref" refer="tns:parameterid">
 			<selector xpath=".//tns:condition|.//tns:characterCondition|
+				.//tns:referenceCondition|.//tns:characterReferenceCondition|
 				.//tns:parameterValue|.//tns:characterParameterValue|
 				.//tns:parameterEffect|.//tns:characterParameterEffect" />
 			<field xpath="@idref" />
@@ -474,6 +476,12 @@
 			<enumeration value="greaterThanEqualTo" />
 		</restriction>
 	</simpleType>
+	<simpleType name="referenceOperator">
+		<restriction base="string">
+			<enumeration value="atMinimum" />
+			<enumeration value="atMaximum" />
+		</restriction>
+	</simpleType>
 
 	<group name="expressionGroup">
 		<choice>
@@ -545,8 +553,7 @@
 					<complexContent>
 						<extension base="anyType">
 							<attribute name="idref" type="NCName" use="required" />
-							<attribute name="operator" type="tns:relationalOperator" use="required">
-							</attribute>
+							<attribute name="operator" type="tns:relationalOperator" use="required" />
 						</extension>
 					</complexContent>
 				</complexType>
@@ -562,10 +569,32 @@
 						<extension base="anyType">
 							<attribute name="idref" type="NCName" use="required" />
 							<attribute name="characteridref" type="NCName" use="required" />
-							<attribute name="operator" type="tns:relationalOperator" use="required">
-							</attribute>
+							<attribute name="operator" type="tns:relationalOperator" use="required" />
 						</extension>
 					</complexContent>
+				</complexType>
+			</element>
+			<element name="referenceCondition">
+				<annotation>
+					<documentation>
+						A condition that checks the value of the parameter referenced with an operator.
+					</documentation>
+				</annotation>
+				<complexType>
+					<attribute name="idref" type="NCName" use="required" />
+					<attribute name="operator" type="tns:referenceOperator" use="required" />
+				</complexType>
+			</element>
+			<element name="characterReferenceCondition">
+				<annotation>
+					<documentation>
+						A condition that checks the value of the parameter of the character referenced with an operator.
+					</documentation>
+				</annotation>
+				<complexType>
+					<attribute name="idref" type="NCName" use="required" />
+					<attribute name="characteridref" type="NCName" use="required" />
+					<attribute name="operator" type="tns:referenceOperator" use="required" />
 				</complexType>
 			</element>
 		</choice>
