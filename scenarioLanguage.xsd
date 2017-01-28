@@ -482,6 +482,12 @@
 			<enumeration value="atMaximum" />
 		</restriction>
 	</simpleType>
+	<simpleType name="calculation">
+		<restriction base="string">
+			<enumeration value="value" />
+			<enumeration value="percentage" />
+		</restriction>
+	</simpleType>
 
 	<group name="expressionGroup">
 		<choice>
@@ -489,12 +495,14 @@
 			<element name="parameterReference">
 				<complexType>
 					<attribute name="idref" type="NCName" use="required" />
+					<attribute name="calculate" type="tns:calculation" use="optional" default="value" />
 				</complexType>
 			</element>
 			<element name="characterParameterReference">
 				<complexType>
 					<attribute name="idref" type="NCName" use="required" />
 					<attribute name="characteridref" type="NCName" use="required" />
+					<attribute name="calculate" type="tns:calculation" use="optional" default="value" />
 				</complexType>
 			</element>
 			<element name="sum">
