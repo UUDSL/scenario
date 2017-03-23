@@ -261,7 +261,20 @@
 					</documentation>
 				</annotation>
 			</attribute>
-			<attribute name="configidref" type="string" use="required"></attribute>
+			<attribute name="configidref" type="string" use="required">
+				<annotation>
+					<documentation>
+						A reference to the id of the config used to create the scenario.
+					</documentation>
+				</annotation>
+			</attribute>
+			<attribute name="configVersion" type="token" use="optional">
+				<annotation>
+					<documentation>
+						The version of the config used to create the scenario.
+					</documentation>
+				</annotation>
+			</attribute>
 		</complexType>
 
 		<key name="characterid">
