@@ -4,6 +4,15 @@
 	xmlns:tns="http://uudsl.github.io/scenario/namespace"
 	elementFormDefault="qualified"
 	version="4.5.0">
+	<!--
+		This schema uses the XML Schema naming convention
+		(names are written in lowerCamelCase with acronyms uppercased).
+		The following suffixes are, however, lowercased whenever
+		they refer to XML Schema concepts:
+		* id
+		* idref
+		* unique
+	-->
 	<element name="scenario">
 		<complexType>
 			<sequence>
