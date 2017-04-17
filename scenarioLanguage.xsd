@@ -730,21 +730,31 @@
 								<complexType>
 									<complexContent>
 										<extension base="tns:statementType">
+											<attribute name="allowInterleave" type="boolean">
+												<annotation>
+													<documentation>
+														Whether interleaving must be allowed after this node.
+													</documentation>
+												</annotation>
+											</attribute>
 											<attribute name="jumpPoint" type="boolean">
 												<annotation>
 													<documentation>
-														Whether it is possible to jump from this node to a node
-														in a different dialogue in this interleave.
+														Deprecated synonym for allowInterleave.
+													</documentation>
+												</annotation>
+											</attribute>
+											<attribute name="allowDialogueEnd" type="boolean">
+												<annotation>
+													<documentation>
+														Whether it must be possible to end this dialogue after this node.
 													</documentation>
 												</annotation>
 											</attribute>
 											<attribute name="inits" type="boolean">
 												<annotation>
 													<documentation>
-														If there are different dialogues in this interleave, whether it is
-														possible to jump from this node to a node in one of those dialogues;
-														else whether it is possible to jump from this node to a node in
-														a dialogue in the next interleave.
+														Deprecated synonym for allowDialogueEnd.
 													</documentation>
 												</annotation>
 											</attribute>
