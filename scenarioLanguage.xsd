@@ -306,6 +306,7 @@
 		<keyref name="characteridref" refer="tns:characterid">
 			<selector xpath=".//tns:computerStatement|
 				.//tns:characterCondition|
+				.//tns:characterParameterReference|
 				.//tns:characterReferenceCondition|
 				.//tns:characterPropertyValue|
 				.//tns:characterParameterValue|
@@ -320,6 +321,7 @@
 			<selector xpath=".//tns:condition|.//tns:characterCondition|
 				.//tns:referenceCondition|.//tns:characterReferenceCondition|
 				.//tns:parameterValue|.//tns:characterParameterValue|
+				.//tns:parameterReference|.//tns:characterParameterReference|
 				.//tns:parameterEffect|.//tns:characterParameterEffect" />
 			<field xpath="@idref" />
 		</keyref>
