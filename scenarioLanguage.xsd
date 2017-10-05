@@ -519,6 +519,13 @@
 			</extension>
 		</simpleContent>
 	</complexType>
+	<complexType name="enumerationItemType">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="value" type="NCName" use="optional" />
+			</extension>
+		</simpleContent>
+	</complexType>
 	<simpleType name="relationalOperator">
 		<restriction base="string">
 			<enumeration value="equalTo" />
@@ -693,8 +700,8 @@
 			<element name="enumeration">
 				<complexType>
 					<sequence>
-						<element name="option" type="string" minOccurs="1" maxOccurs="unbounded" />
-						<element name="default" type="string" minOccurs="0" maxOccurs="1" />
+						<element name="option" type="tns:enumerationItemType" minOccurs="1" maxOccurs="unbounded" />
+						<element name="default" type="tns:enumerationItemType" minOccurs="0" maxOccurs="1" />
 					</sequence>
 				</complexType>
 			</element>
