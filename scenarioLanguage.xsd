@@ -3,7 +3,7 @@
 	targetNamespace="http://uudsl.github.io/scenario/namespace"
 	xmlns:tns="http://uudsl.github.io/scenario/namespace"
 	elementFormDefault="qualified"
-	version="4.7.0">
+	version="4.8.0">
 	<!--
 		This schema uses the XML Schema naming convention
 		(names are written in lowerCamelCase with acronyms uppercased).
