@@ -504,6 +504,34 @@
 			</element>
 		</sequence>
 		<attribute name="id" type="NCName" use="required" />
+		<attribute name="allowInterleave" type="boolean">
+			<annotation>
+				<documentation>
+					Whether interleaving must be allowed after this statement.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="jumpPoint" type="boolean">
+			<annotation>
+				<documentation>
+					Deprecated synonym for allowInterleave.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="allowDialogueEnd" type="boolean">
+			<annotation>
+				<documentation>
+					Whether it must be possible to end the dialogue of this statement after this statement.
+				</documentation>
+			</annotation>
+		</attribute>
+		<attribute name="inits" type="boolean">
+			<annotation>
+				<documentation>
+					Deprecated synonym for allowDialogueEnd.
+				</documentation>
+			</annotation>
+		</attribute>
 		<attribute name="end" type="boolean" use="optional">
 			<annotation>
 				<documentation>
@@ -768,34 +796,6 @@
 								<complexType>
 									<complexContent>
 										<extension base="tns:statementType">
-											<attribute name="allowInterleave" type="boolean">
-												<annotation>
-													<documentation>
-														Whether interleaving must be allowed after this node.
-													</documentation>
-												</annotation>
-											</attribute>
-											<attribute name="jumpPoint" type="boolean">
-												<annotation>
-													<documentation>
-														Deprecated synonym for allowInterleave.
-													</documentation>
-												</annotation>
-											</attribute>
-											<attribute name="allowDialogueEnd" type="boolean">
-												<annotation>
-													<documentation>
-														Whether it must be possible to end this dialogue after this node.
-													</documentation>
-												</annotation>
-											</attribute>
-											<attribute name="inits" type="boolean">
-												<annotation>
-													<documentation>
-														Deprecated synonym for allowDialogueEnd.
-													</documentation>
-												</annotation>
-											</attribute>
 											<attribute name="characteridref" type="NCName">
 												<annotation>
 													<documentation>
