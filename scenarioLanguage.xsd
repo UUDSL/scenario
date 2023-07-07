@@ -424,6 +424,15 @@
 					<field xpath="@name" />
 				</unique>
 			</element>
+			<element name="attributeWrapper">
+				<complexType>
+					<sequence>
+						<element name="attributeType" type="tns:simpleDomainDataTypeType"/>
+					</sequence>
+					<attribute name="elementName" type="NCName" use="required"/>
+					<attribute name="attributeName" type="NCName" use="required"/>
+				</complexType>
+			</element>
 			<element name="extension">
 				<complexType>
 					<sequence>
