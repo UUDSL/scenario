@@ -380,68 +380,30 @@
 	<complexType name="simpleDomainDataTypeType">
 		<group ref="tns:simpleDomainDataTypeGroup" />
 	</complexType>
+	<complexType name="complexDomainDataTypeType">
+		<group ref="tns:complexDomainDataTypeGroup" />
+	</complexType>
 	<complexType name="domainDataTypeType">
 		<choice>
-			<group ref="tns:simpleDomainDataTypeGroup" />
-			<element name="list">
-				<complexType>
-					<sequence>
-						<element name="itemType" type="tns:domainDataTypeType" />
-						<element name="default" minOccurs="0" maxOccurs="1">
-							<complexType>
-								<sequence>
-									<element name="item" type="anyType" minOccurs="0" maxOccurs="unbounded" />
-								</sequence>
-							</complexType>
-						</element>
-					</sequence>
-				</complexType>
-			</element>
-			<element name="attributeRecord">
-				<complexType>
-					<sequence>
-						<element name="content" minOccurs="0" maxOccurs="1">
-							<complexType>
-								<sequence>
-									<element name="type" type="tns:domainDataTypeType" />
-								</sequence>
-								<attribute name="name" type="NCName" use="required" />
-							</complexType>
-						</element>
-						<element name="attribute" minOccurs="0" maxOccurs="unbounded">
-							<complexType>
-								<sequence>
-									<element name="type" type="tns:simpleDomainDataTypeType" />
-								</sequence>
-								<attribute name="name" type="NCName" use="required" />
-							</complexType>
-						</element>
-						<element name="default" type="anyType" minOccurs="0" maxOccurs="1" />
-					</sequence>
-				</complexType>
-				<unique name="nameunique">
-					<selector xpath="./tns:content|./tns:attribute" />
-					<field xpath="@name" />
-				</unique>
-			</element>
-			<element name="attributeWrapper">
-				<complexType>
-					<sequence>
-						<element name="attributeType" type="tns:simpleDomainDataTypeType"/>
-					</sequence>
-					<attribute name="elementName" type="NCName" use="required"/>
-					<attribute name="attributeName" type="NCName" use="required"/>
-				</complexType>
-			</element>
+			<group ref="tns:complexDomainDataTypeGroup" />
 			<element name="extension">
 				<complexType>
 					<sequence>
-						<element name="equivalentType" type="tns:domainDataTypeType" />
+						<element name="equivalentType" type="tns:complexDomainDataTypeType" />
 						<any namespace="##other" processContents="lax" />
 					</sequence>
 				</complexType>
 			</element>
 		</choice>
+		<attribute name="nullable" use="optional" default="false">
+			<simpleType>
+				<restriction base="string">
+					<enumeration value="false"/>
+					<enumeration value="true"/>
+					<enumeration value="defaultNull"/>
+				</restriction>
+			</simpleType>
+		</attribute>
 	</complexType>
 	<simpleType name="dateOrYearMonthOrYear">
 		<union memberTypes="date gYearMonth gYear" />
@@ -741,6 +703,61 @@
 						<element name="option" type="tns:enumerationItemType" minOccurs="1" maxOccurs="unbounded" />
 						<element name="default" type="tns:enumerationItemType" minOccurs="0" maxOccurs="1" />
 					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</group>
+	<group name="complexDomainDataTypeGroup">
+		<choice>
+			<group ref="tns:simpleDomainDataTypeGroup" />
+			<element name="list">
+				<complexType>
+					<sequence>
+						<element name="itemType" type="tns:domainDataTypeType" />
+						<element name="default" minOccurs="0" maxOccurs="1">
+							<complexType>
+								<sequence>
+									<element name="item" type="anyType" minOccurs="0" maxOccurs="unbounded" />
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="attributeRecord">
+				<complexType>
+					<sequence>
+						<element name="content" minOccurs="0" maxOccurs="1">
+							<complexType>
+								<sequence>
+									<element name="type" type="tns:domainDataTypeType" />
+								</sequence>
+								<attribute name="name" type="NCName" use="required" />
+							</complexType>
+						</element>
+						<element name="attribute" minOccurs="0" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="type" type="tns:simpleDomainDataTypeType" />
+								</sequence>
+								<attribute name="name" type="NCName" use="required" />
+							</complexType>
+						</element>
+						<element name="default" type="anyType" minOccurs="0" maxOccurs="1" />
+					</sequence>
+				</complexType>
+				<unique name="nameunique">
+					<selector xpath="./tns:content|./tns:attribute" />
+					<field xpath="@name" />
+				</unique>
+			</element>
+			<element name="attributeWrapper">
+				<complexType>
+					<sequence>
+						<element name="attributeType" type="tns:simpleDomainDataTypeType"/>
+					</sequence>
+					<attribute name="elementName" type="NCName" use="required"/>
+					<attribute name="attributeName" type="NCName" use="required"/>
 				</complexType>
 			</element>
 		</choice>
