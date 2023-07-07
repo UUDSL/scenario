@@ -312,7 +312,7 @@
 			<selector xpath="./tns:definitions/tns:annotations/tns:annotation" />
 			<field xpath="@id" />
 		</key>
-		<key name="expressionid">
+		<key name="typedExpressionid">
 			<selector xpath="./tns:typedExpressions/tns:typedExpression" />
 			<field xpath="@id" />
 		</key>
@@ -353,6 +353,10 @@
 		</keyref>
 		<keyref name="responseidref" refer="tns:statementid">
 			<selector xpath=".//tns:response" />
+			<field xpath="@idref" />
+		</keyref>
+		<keyref name="standaloneTypedExpressionidref" refer="tns:typedExpressionid">
+			<selector xpath=".//tns:standaloneTypedExpressionReference" />
 			<field xpath="@idref" />
 		</keyref>
 	</element>
@@ -1004,5 +1008,10 @@
 			<selector xpath="./tns:annotationValue" />
 			<field xpath="@idref" />
 		</unique>
+	</element>
+	<element name="standaloneTypedExpressionReference">
+		<complexType>
+			<attribute name="idref" type="NCName" use="required" />
+		</complexType>
 	</element>
 </schema>
