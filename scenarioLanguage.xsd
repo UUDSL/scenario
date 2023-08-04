@@ -247,6 +247,7 @@
 								</unique>
 							</element>
 							<element ref="tns:propertyValues" />
+							<element minOccurs="0" maxOccurs="1" ref="tns:annotationValues" />
 						</sequence>
 					</complexType>
 				</element>
