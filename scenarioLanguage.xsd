@@ -582,6 +582,14 @@
 					<attribute name="divisor" type="int" use="optional" />
 				</complexType>
 			</element>
+			<element name="divide">
+				<complexType>
+					<sequence>
+						<element name="dividend" type="tns:singleExpressionType"/>
+						<element name="divisor" type="tns:singleExpressionType"/>
+					</sequence>
+				</complexType>
+			</element>
 			<element name="choose">
 				<complexType>
 					<sequence>
